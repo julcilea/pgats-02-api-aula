@@ -27,6 +27,9 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Criar pasta para relatórios
+      run: mkdir -p ./test-results
+
     - name: Rodar os testes de API via Controller
       run: npm run test-controller
 
@@ -36,18 +39,19 @@ jobs:
     - name: Esperar a API estar Funcionando
       run: sleep 5
 
-    - name: Criar pasta para relatórios
-      run: mkdir -p ./test-results
-
     - name: Rodar os testes de API via HTTP
       run: npm run test-external
 
     - name: Unir relatórios JSON em um só
-      if: ${{ hashFiles('./test-results/*.json') != '' }}
-      run: npx mochawesome-merge ./test-results/*.json > ./test-results/report.json
+      run: |
+        if compgen -G "./test-results/*.json" > /dev/null; then
+          npx mochawesome-merge ./test-results/*.json > ./test-results/report.json
+        else
+          echo "{}" > ./test-results/report.json
+        fi
 
     - name: Gerar relatório HTML final
-      if: ${{ hashFiles('./test-results/*.json') != '' }}
+      if: ${{ hashFiles('./test-results/report.json') != '' }}
       run: npx mochawesome-report-generator ./test-results/report.json -o ./public
 
       # Publica o relatório no GitHub Pages
