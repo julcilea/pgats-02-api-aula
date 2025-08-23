@@ -42,27 +42,15 @@ jobs:
     - name: Rodar os testes de API via HTTP
       run: npm run test-external
 
-    - name: Unir relatórios JSON em um só
-      run: |
-        if compgen -G "./test-results/*.json" > /dev/null; then
-          npx mochawesome-merge ./test-results/*.json > ./test-results/report.json
-        else
-          echo "{}" > ./test-results/report.json
-        fi
-
-    - name: Gerar relatório HTML final
-      if: ${{ hashFiles('./test-results/report.json') != '' }}
-      run: npx mochawesome-report-generator ./test-results/report.json -o ./public
-
       # Publica o relatório no GitHub Pages
-    - name: Deploy Mochawesome Report para o GitHub Pages
+    - name: Deploy Mochawesome Reports para o GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
+        publish_dir: ./test-results
 
-    - name: Exibir link do relatório no Summary
+    - name: Exibir links dos relatórios no Summary
       run: |
-        echo "## ✅ Relatório Mochawesome Gerado!" >> $GITHUB_STEP_SUMMARY
-        echo "🔗 [Clique aqui para abrir o relatório](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report.html)" >> $GITHUB_STEP_SUMMARY
-
+        echo "## ✅ Relatórios Mochawesome Gerados!" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 [Relatório HTTP](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report.html)" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 [Relatório Controller](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report1.html)" >> $GITHUB_STEP_SUMMARY
