@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha 'test/**/*.test.js' --timeout 10000 --reporter mochawesome",
     "test-external": "mocha 'test/external/**/*.test.js' --timeout 10000 --reporter mochawesome --reporter-options reportDir=./test-results,reportFilename=report,overwrite=true,html=true,json=true",
-    "test-controller": "mocha 'test/controller/**/*.test.js' --timeout 10000 --reporter mochawesome",
+    "test-controller": "mocha 'test/controller/**/*.test.js' --timeout 10000 --reporter mochawesome --reporter-options reportDir=./test-results,reportFilename=report1,overwrite=true,html=true,json=true",
     "start": "node server.js"
   },
   "keywords": [],
