@@ -27,9 +27,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Criar pasta para relatórios
-      run: mkdir -p ./test-results
-
     - name: Rodar os testes de API via Controller
       run: npm run test-controller
 
@@ -53,5 +50,5 @@ jobs:
     - name: Exibir links dos relatórios no Summary
       run: |
         echo "## ✅ Relatórios Mochawesome Gerados!" >> $GITHUB_STEP_SUMMARY
-        echo "🔗 [Relatório HTTP](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report.html)" >> $GITHUB_STEP_SUMMARY
         echo "🔗 [Relatório Controller](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report1.html)" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 [Relatório HTTP](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report.html)" >> $GITHUB_STEP_SUMMARY
