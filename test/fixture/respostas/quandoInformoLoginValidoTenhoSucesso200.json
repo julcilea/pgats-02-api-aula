@@ -1,0 +1,10 @@
+{
+  "user": {
+    "username": "julio",
+    "favorecidos": [
+      "priscila"
+    ],
+    "saldo": 10000
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imp1bGlvIiwiaWF0IjoxNzU1OTcxMTIxLCJleHAiOjE3NTU5NzQ3MjF9.1M0VpxHFcwOA1AOU4kW8wjHduiXsE72pGQAi4X3H3Bw"
+}

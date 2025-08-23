@@ -1,5 +1,10 @@
 name: Node.js CI
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 on:
   push:
     branches: [ "main" ]
@@ -30,3 +35,22 @@ jobs:
 
     - name: Rodar os testes de API via HTTP
       run: npm run test-external
+
+    - name: Unir relatórios JSON em um só
+      run: npx mochawesome-merge ./test-results/*.json > ./test-results/report.json
+
+    - name: Gerar relatório HTML final
+      run: npx mochawesome-report-generator ./test-results/report.json -o ./public
+
+      # Publica o relatório no GitHub Pages
+    - name: Deploy Mochawesome Report para o GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+
+    - name: Exibir link do relatório no Summary
+      run: |
+        echo "## ✅ Relatório Mochawesome Gerado!" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 [Clique aqui para abrir o relatório](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report.html)" >> $GITHUB_STEP_SUMMARY
+
