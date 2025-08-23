@@ -5,9 +5,9 @@
     "passes": 3,
     "pending": 0,
     "failures": 0,
-    "start": "2025-08-23T20:52:25.144Z",
-    "end": "2025-08-23T20:52:25.259Z",
-    "duration": 115,
+    "start": "2025-08-23T21:11:40.340Z",
+    "end": "2025-08-23T21:11:40.454Z",
+    "duration": 114,
     "testsRegistered": 3,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "bb85110c-335a-4df1-936e-5efe7a9701b3",
+      "uuid": "6fdffc7a-ef32-403b-8004-a54ceb6c2094",
       "title": "",
       "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/external/transferExternal.test.js",
       "file": "/test/external/transferExternal.test.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "ddb0eeeb-7961-435d-b7c3-3db8a3350e4b",
+          "uuid": "60dc8bb3-9677-4ee5-b7ca-ffae93916a13",
           "title": "Transfer",
           "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/external/transferExternal.test.js",
           "file": "/test/external/transferExternal.test.js",
@@ -36,7 +36,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "34d1b38a-6fe0-4f4b-bc77-75a5f9528a8a",
+              "uuid": "1d9a4330-3bb6-4f7d-bd01-14f49e722d79",
               "title": "POST /transfers",
               "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/external/transferExternal.test.js",
               "file": "/test/external/transferExternal.test.js",
@@ -54,8 +54,8 @@
                   "context": null,
                   "code": "// 1) Capturar o Token\nconst respostaLogin = await request('http://localhost:3000')\n    .post('/users/login')\n    .send({\n        username: 'julio',\n        password: '123456'\n        });\n\ntoken = respostaLogin.body.token;",
                   "err": {},
-                  "uuid": "c29c62a9-39a6-4817-bebf-4ea5aec2c9d6",
-                  "parentUUID": "34d1b38a-6fe0-4f4b-bc77-75a5f9528a8a",
+                  "uuid": "55c8cd26-5f0e-42ff-9d87-91ab41b4ad78",
+                  "parentUUID": "1d9a4330-3bb6-4f7d-bd01-14f49e722d79",
                   "isHook": true,
                   "skipped": false
                 }
@@ -75,8 +75,8 @@
                   "context": null,
                   "code": "// 2) Realizar a Transferência\n           const resposta = await request('http://localhost:3000')\n               .post('/transfers')\n               .set('Authorization', `Bearer ${token}`)\n               .send({\n                   from: \"julio\",\n                   to: \"isabelle\",\n                   value: 100\n           });\n           \n           expect(resposta.status).to.equal(400);\n           expect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado')",
                   "err": {},
-                  "uuid": "0832e13e-bae5-4bee-832c-2b4283a4cbca",
-                  "parentUUID": "34d1b38a-6fe0-4f4b-bc77-75a5f9528a8a",
+                  "uuid": "3b086bee-472f-488e-bd84-4452560c97a7",
+                  "parentUUID": "1d9a4330-3bb6-4f7d-bd01-14f49e722d79",
                   "isHook": false,
                   "skipped": false
                 },
@@ -93,8 +93,8 @@
                   "context": null,
                   "code": "const resposta = await request(\"http://localhost:3000\")\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"jose\",\n        to: \"isabelle\",\n        value: 100\n    });\n\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado');",
                   "err": {},
-                  "uuid": "df25b4b0-5213-4a7d-ad92-40d7d8d3db03",
-                  "parentUUID": "34d1b38a-6fe0-4f4b-bc77-75a5f9528a8a",
+                  "uuid": "803770db-de91-43ac-b970-e767f30aeb79",
+                  "parentUUID": "1d9a4330-3bb6-4f7d-bd01-14f49e722d79",
                   "isHook": false,
                   "skipped": false
                 },
@@ -111,17 +111,17 @@
                   "context": null,
                   "code": "const resposta = await request(\"http://localhost:3000\")\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"julio\",\n        to: \"priscila\",\n        value: 100\n    });\nexpect(resposta.status).to.equal(201);\n\n// Validação com um Fixture\nconst respostaEsperada = require('../fixture/respostas/quandoInformoValoresValidosEuTenhoSucessoCom201Created.json')\ndelete resposta.body.date;\ndelete respostaEsperada.date; \nexpect(resposta.body).to.deep.equal(respostaEsperada);",
                   "err": {},
-                  "uuid": "f837bcc6-defb-4131-89d6-129db7c316fc",
-                  "parentUUID": "34d1b38a-6fe0-4f4b-bc77-75a5f9528a8a",
+                  "uuid": "68ffbd52-98a8-4f88-a0f6-d0b840b20969",
+                  "parentUUID": "1d9a4330-3bb6-4f7d-bd01-14f49e722d79",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "0832e13e-bae5-4bee-832c-2b4283a4cbca",
-                "df25b4b0-5213-4a7d-ad92-40d7d8d3db03",
-                "f837bcc6-defb-4131-89d6-129db7c316fc"
+                "3b086bee-472f-488e-bd84-4452560c97a7",
+                "803770db-de91-43ac-b970-e767f30aeb79",
+                "68ffbd52-98a8-4f88-a0f6-d0b840b20969"
               ],
               "failures": [],
               "pending": [],
@@ -170,7 +170,7 @@
     },
     "marge": {
       "options": {
-        "reportDir": "./test-results",
+        "reportDir": "./",
         "reportFilename": "report",
         "overwrite": "true",
         "html": "true",
