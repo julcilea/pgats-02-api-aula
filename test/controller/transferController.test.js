@@ -12,9 +12,26 @@ const transferService = require('../../service/transferService');
 // Testes
 describe('Transfer Controller', () => {
     describe('POST /transfers', () => {
+
+        let token = null;
+        
+        beforeEach(async() => {
+            // 1) Capturar o Token
+            const respostaLogin = await request(app)
+                .post('/users/login')
+                .send({
+                    username: 'julio',
+                    password: '123456'
+        });
+                    
+        token = respostaLogin.body.token;
+
+        });
+
         it('Quando informo remetente e destinatario inexistentes recebo 400', async () => {
             const resposta = await request(app)
                 .post('/transfers')
+                .set('Authorization', `Bearer ${token}`)
                 .send({
                     from: "julio",
                     to: "priscila",
@@ -32,6 +49,7 @@ describe('Transfer Controller', () => {
 
             const resposta = await request(app)
                 .post('/transfers')
+                .set('Authorization', `Bearer ${token}`)
                 .send({
                     from: "julio",
                     to: "priscila",
@@ -41,8 +59,6 @@ describe('Transfer Controller', () => {
             expect(resposta.status).to.equal(400);
             expect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado')
 
-            // Reseto o Mock
-            sinon.restore();
         });
 
         it('Usando Mocks: Quando informo valores válidos eu tenho sucesso com 201 CREATED', async () => {
@@ -57,6 +73,7 @@ describe('Transfer Controller', () => {
 
             const resposta = await request(app)
                 .post('/transfers')
+                .set('Authorization', `Bearer ${token}`)
                 .send({
                     from: "julio",
                     to: "priscilaaaaaaaaaaa",
@@ -75,7 +92,9 @@ describe('Transfer Controller', () => {
             // expect(resposta.body).to.have.property('from', 'julio');
             // expect(resposta.body).to.have.property('to', 'priscila');
             // expect(resposta.body).to.have.property('value', 100);
+        });
 
+        afterEach(() => {
             // Reseto o Mock
             sinon.restore();
         });
