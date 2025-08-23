@@ -1,0 +1,182 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-08-23T20:42:33.790Z",
+    "end": "2025-08-23T20:42:33.916Z",
+    "duration": 126,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "0b0e4f60-68b3-42f2-8192-075668f215b1",
+      "title": "",
+      "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/external/transferExternal.test.js",
+      "file": "/test/external/transferExternal.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e557ac4e-4ec8-4d86-b1bc-03dcc33018f0",
+          "title": "Transfer",
+          "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/external/transferExternal.test.js",
+          "file": "/test/external/transferExternal.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "258d3217-58f5-4ec1-ba52-c85bfd7b3ea7",
+              "title": "POST /transfers",
+              "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/external/transferExternal.test.js",
+              "file": "/test/external/transferExternal.test.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook in \"POST /transfers\"",
+                  "fullTitle": "Transfer POST /transfers \"before each\" hook in \"POST /transfers\"",
+                  "timedOut": false,
+                  "duration": 24,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "// 1) Capturar o Token\nconst respostaLogin = await request('http://localhost:3000')\n    .post('/users/login')\n    .send({\n        username: 'julio',\n        password: '123456'\n        });\n\ntoken = respostaLogin.body.token;",
+                  "err": {},
+                  "uuid": "6c442747-fba7-4715-b1a7-30ad63bf3af3",
+                  "parentUUID": "258d3217-58f5-4ec1-ba52-c85bfd7b3ea7",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Quando informo remetente e destinatario inexistentes recebo 400",
+                  "fullTitle": "Transfer POST /transfers Quando informo remetente e destinatario inexistentes recebo 400",
+                  "timedOut": false,
+                  "duration": 6,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "// 2) Realizar a Transferência\n           const resposta = await request('http://localhost:3000')\n               .post('/transfers')\n               .set('Authorization', `Bearer ${token}`)\n               .send({\n                   from: \"julio\",\n                   to: \"isabelle\",\n                   value: 100\n           });\n           \n           expect(resposta.status).to.equal(400);\n           expect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado')",
+                  "err": {},
+                  "uuid": "8d6695ba-8e08-4ced-9d6f-ad79c56be65f",
+                  "parentUUID": "258d3217-58f5-4ec1-ba52-c85bfd7b3ea7",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Usando Mocks: Quando informo remetente e destinatario inexistentes recebo 400",
+                  "fullTitle": "Transfer POST /transfers Usando Mocks: Quando informo remetente e destinatario inexistentes recebo 400",
+                  "timedOut": false,
+                  "duration": 4,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request(\"http://localhost:3000\")\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"jose\",\n        to: \"isabelle\",\n        value: 100\n    });\n\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado');",
+                  "err": {},
+                  "uuid": "efe9727b-3497-49da-8a73-16c16f4472eb",
+                  "parentUUID": "258d3217-58f5-4ec1-ba52-c85bfd7b3ea7",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Usando Mocks: Quando informo valores válidos eu tenho sucesso com 201 CREATED",
+                  "fullTitle": "Transfer POST /transfers Usando Mocks: Quando informo valores válidos eu tenho sucesso com 201 CREATED",
+                  "timedOut": false,
+                  "duration": 4,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request(\"http://localhost:3000\")\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"julio\",\n        to: \"priscila\",\n        value: 100\n    });\nexpect(resposta.status).to.equal(201);\n\n// Validação com um Fixture\nconst respostaEsperada = require('../fixture/respostas/quandoInformoValoresValidosEuTenhoSucessoCom201Created.json')\ndelete resposta.body.date;\ndelete respostaEsperada.date; \nexpect(resposta.body).to.deep.equal(respostaEsperada);",
+                  "err": {},
+                  "uuid": "05deb501-05b1-4c12-aea6-9636382a9aa0",
+                  "parentUUID": "258d3217-58f5-4ec1-ba52-c85bfd7b3ea7",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "8d6695ba-8e08-4ced-9d6f-ad79c56be65f",
+                "efe9727b-3497-49da-8a73-16c16f4472eb",
+                "05deb501-05b1-4c12-aea6-9636382a9aa0"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 14,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 10000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "./test-results",
+        "reportFilename": "report",
+        "overwrite": "true",
+        "html": "true",
+        "json": "true"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
