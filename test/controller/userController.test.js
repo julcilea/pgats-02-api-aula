@@ -67,7 +67,7 @@ describe('User Controller', () => {
                     username: "julio",
                     password: "123456"
             });
-            
+
             expect(resposta.status).to.equal(200);
             const respostaLogin = require('../fixture/respostas/quandoInformoLoginValidoTenhoSucesso200.json');
             delete resposta.body.token;
@@ -83,11 +83,11 @@ describe('User Controller', () => {
 
     describe('GET /users', () => {
 
-        it('Quando solicito so dados de usuarios tenho sucesso com 200', async () => {
+        it('Quando solicito os dados de usuarios tenho sucesso com 200', async () => {
             const resposta = await request(app)
                 .get('/users')
                 .send();
-            
+
             expect(resposta.status).to.equal(200);
             const respostaCadastro = require('../fixture/respostas/quandoSolicitoDadosDosUsuariosEuTenhoSucesso200.json');
             expect(resposta.body).to.deep.equal(respostaCadastro);

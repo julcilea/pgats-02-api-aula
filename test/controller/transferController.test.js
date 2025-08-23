@@ -33,8 +33,8 @@ describe('Transfer Controller', () => {
                 .post('/transfers')
                 .set('Authorization', `Bearer ${token}`)
                 .send({
-                    from: "julio",
-                    to: "priscila",
+                    from: "juliana",
+                    to: "maria",
                     value: 100
                 });
             

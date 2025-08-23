@@ -27,17 +27,20 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Rodar os testes de API via Controller
+      run: npm run test-controller
+
     - name: Subir a API 
       run: npm start &
 
     - name: Esperar a API estar Funcionando
       run: sleep 5
 
-    - name: Rodar os testes de API via HTTP
-      run: npm run test-external
-
     - name: Criar pasta para relatórios
       run: mkdir -p ./test-results
+
+    - name: Rodar os testes de API via HTTP
+      run: npm run test-external
 
     - name: Unir relatórios JSON em um só
       if: ${{ hashFiles('./test-results/*.json') != '' }}
