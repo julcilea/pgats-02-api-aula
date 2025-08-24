@@ -1,4 +1,3 @@
-
 const { gql } = require('apollo-server-express');
 const userService = require('../service/userService');
 const transferService = require('../service/transferService');
