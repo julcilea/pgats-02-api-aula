@@ -1,37 +1,22 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const { makeExecutableSchema } = require('@graphql-tools/schema');
-const typeDefs = require('./schema').typeDefs;
-const resolvers = require('./schema').resolvers;
-const jwt = require('jsonwebtoken');
+const typeDefs = require('./typeDefs');
+const resolvers = require('./resolvers');
+const authenticate = require('./authenticate');
 
 const app = express();
 
-const schema = makeExecutableSchema({
+const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => authenticate(req)
 });
 
-const server = new ApolloServer({
-  schema,
-  context: ({ req }) => {
-    const token = req.headers.authorization || '';
-    if (token) {
-      try {
-        const user = jwt.verify(token.replace('Bearer ', ''), 'your-secret-key');
-        return { user };
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  },
-});
-
-async function startServer() {
+async function startApolloServer() {
   await server.start();
   server.applyMiddleware({ app });
 }
 
-startServer();
+startApolloServer();
 
 module.exports = app;
