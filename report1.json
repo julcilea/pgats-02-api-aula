@@ -1,14 +1,14 @@
 {
   "stats": {
-    "suites": 6,
-    "tests": 8,
-    "passes": 8,
+    "suites": 7,
+    "tests": 12,
+    "passes": 12,
     "pending": 0,
     "failures": 0,
-    "start": "2025-09-06T13:23:11.330Z",
-    "end": "2025-09-06T13:23:11.498Z",
-    "duration": 168,
-    "testsRegistered": 8,
+    "start": "2025-09-06T14:12:03.982Z",
+    "end": "2025-09-06T14:12:04.250Z",
+    "duration": 268,
+    "testsRegistered": 12,
     "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "f00026b6-419d-45ec-8571-fbf6636ea88c",
+      "uuid": "b333728a-6b5e-48ad-be16-bff2a89e2804",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "2c27ea04-6c8a-4fbb-97d2-13a8d8d035f7",
+          "uuid": "fb7f9091-cb60-44f2-8703-35d523d5c213",
           "title": "Transfer Controller",
           "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/controller/transferController.test.js",
           "file": "/test/controller/transferController.test.js",
@@ -36,7 +36,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "b7aa784d-fa0a-4611-81d4-f72390a73707",
+              "uuid": "8a86bd90-f9cc-4def-a707-c3f9380b1b4b",
               "title": "POST /transfers",
               "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/controller/transferController.test.js",
               "file": "/test/controller/transferController.test.js",
@@ -45,7 +45,7 @@
                   "title": "\"before each\" hook in \"POST /transfers\"",
                   "fullTitle": "Transfer Controller POST /transfers \"before each\" hook in \"POST /transfers\"",
                   "timedOut": false,
-                  "duration": 24,
+                  "duration": 23,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -54,8 +54,8 @@
                   "context": null,
                   "code": "// 1) Capturar o Token\nconst respostaLogin = await request(app)\n    .post('/users/login')\n    .send({\n        username: 'julio',\n        password: '123456'\n        });\n        \n        token = respostaLogin.body.token;",
                   "err": {},
-                  "uuid": "fec6d2af-0ae5-442f-83b8-1a9a83d3fa27",
-                  "parentUUID": "b7aa784d-fa0a-4611-81d4-f72390a73707",
+                  "uuid": "c60e5997-70af-4a25-b584-1520fcbf2327",
+                  "parentUUID": "8a86bd90-f9cc-4def-a707-c3f9380b1b4b",
                   "isHook": true,
                   "skipped": false
                 }
@@ -74,8 +74,8 @@
                   "context": null,
                   "code": "// Reseto o Mock\nsinon.restore();",
                   "err": {},
-                  "uuid": "ba70f681-fea3-462a-93fa-dc9269055557",
-                  "parentUUID": "b7aa784d-fa0a-4611-81d4-f72390a73707",
+                  "uuid": "bd80be1a-38d8-4e80-9350-8170369464db",
+                  "parentUUID": "8a86bd90-f9cc-4def-a707-c3f9380b1b4b",
                   "isHook": true,
                   "skipped": false
                 }
@@ -85,7 +85,7 @@
                   "title": "Quando informo remetente e destinatario inexistentes recebo 400",
                   "fullTitle": "Transfer Controller POST /transfers Quando informo remetente e destinatario inexistentes recebo 400",
                   "timedOut": false,
-                  "duration": 6,
+                  "duration": 5,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -94,8 +94,8 @@
                   "context": null,
                   "code": "const resposta = await request(app)\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"juliana\",\n        to: \"maria\",\n        value: 100\n    });\n\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado')",
                   "err": {},
-                  "uuid": "4f0b9731-835f-47f5-9457-96de9128bb07",
-                  "parentUUID": "b7aa784d-fa0a-4611-81d4-f72390a73707",
+                  "uuid": "117f386e-dffa-4c8c-9565-cfa208817710",
+                  "parentUUID": "8a86bd90-f9cc-4def-a707-c3f9380b1b4b",
                   "isHook": false,
                   "skipped": false
                 },
@@ -103,7 +103,7 @@
                   "title": "Usando Mocks: Quando informo remetente e destinatario inexistentes recebo 400",
                   "fullTitle": "Transfer Controller POST /transfers Usando Mocks: Quando informo remetente e destinatario inexistentes recebo 400",
                   "timedOut": false,
-                  "duration": 5,
+                  "duration": 4,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -112,8 +112,8 @@
                   "context": null,
                   "code": "// Mocar apenas a função transfer do Service\nconst transferServiceMock = sinon.stub(transferService, 'transfer');\ntransferServiceMock.throws(new Error('Usuário remetente ou destinatário não encontrado'));\nconst resposta = await request(app)\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"julio\",\n        to: \"priscila\",\n        value: 100\n    });\n\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado')",
                   "err": {},
-                  "uuid": "bbc09df6-d578-4d9b-8ef9-7c74e3341aa8",
-                  "parentUUID": "b7aa784d-fa0a-4611-81d4-f72390a73707",
+                  "uuid": "2a9ff94b-b29f-474c-bc75-e6511f029a4e",
+                  "parentUUID": "8a86bd90-f9cc-4def-a707-c3f9380b1b4b",
                   "isHook": false,
                   "skipped": false
                 },
@@ -130,22 +130,137 @@
                   "context": null,
                   "code": "// Mocar apenas a função transfer do Service\nconst transferServiceMock = sinon.stub(transferService, 'transfer');\ntransferServiceMock.returns({ \n    from: \"julio\", \n    to: \"priscila\", \n    value: 100, \n    date: new Date().toISOString() \n});\nconst resposta = await request(app)\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"julio\",\n        to: \"priscilaaaaaaaaaaa\",\n        value: 100\n    });\n\nexpect(resposta.status).to.equal(201);\n\n// Validação com um Fixture\nconst respostaEsperada = require('../fixture/respostas/quandoInformoValoresValidosEuTenhoSucessoCom201Created.json')\ndelete resposta.body.date;\ndelete respostaEsperada.date; \nexpect(resposta.body).to.deep.equal(respostaEsperada);\n// Um expect para comparar a Resposta.body com a String contida no arquivo\n// expect(resposta.body).to.have.property('from', 'julio');\n// expect(resposta.body).to.have.property('to', 'priscila');\n// expect(resposta.body).to.have.property('value', 100);",
                   "err": {},
-                  "uuid": "6b14cfc4-6caf-4f28-b0b2-eefa15a4a439",
-                  "parentUUID": "b7aa784d-fa0a-4611-81d4-f72390a73707",
+                  "uuid": "800c93dc-50f9-4dac-b045-8518b41a2ab0",
+                  "parentUUID": "8a86bd90-f9cc-4def-a707-c3f9380b1b4b",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Transferência acima de R$ 5.000,00 para não favorecido deve falhar (400)",
+                  "fullTitle": "Transfer Controller POST /transfers Transferência acima de R$ 5.000,00 para não favorecido deve falhar (400)",
+                  "timedOut": false,
+                  "duration": 3,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request(app)\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"julio\",\n        to: \"renata\", \n        value: 5000.01\n    });\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Transferência acima de R$ 5.000,00 só para favorecidos');",
+                  "err": {},
+                  "uuid": "8a61588c-26d4-4c0d-8108-e21b5deef60b",
+                  "parentUUID": "8a86bd90-f9cc-4def-a707-c3f9380b1b4b",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Transferência acima de R$ 5.000,00 para favorecido deve ter sucesso (201)",
+                  "fullTitle": "Transfer Controller POST /transfers Transferência acima de R$ 5.000,00 para favorecido deve ter sucesso (201)",
+                  "timedOut": false,
+                  "duration": 3,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request(app)\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"julio\",\n        to: \"priscila\",\n        value: 5000.01\n    });\nexpect(resposta.status).to.equal(201);\nexpect(resposta.body).to.have.property('from', 'julio');\nexpect(resposta.body).to.have.property('to', 'priscila');\nexpect(resposta.body).to.have.property('value', 5000.01);",
+                  "err": {},
+                  "uuid": "316745b2-d8e5-4b2f-bcde-f6c0273e6487",
+                  "parentUUID": "8a86bd90-f9cc-4def-a707-c3f9380b1b4b",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Transferência com valor maior que o saldo deve falhar (400)",
+                  "fullTitle": "Transfer Controller POST /transfers Transferência com valor maior que o saldo deve falhar (400)",
+                  "timedOut": false,
+                  "duration": 3,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request(app)\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"julio\",\n        to: \"priscila\",\n        value: 10000.01 // saldo insuficiente\n    });\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Saldo insuficiente');",
+                  "err": {},
+                  "uuid": "1f642701-1812-41d2-ae75-9c1948a13e5d",
+                  "parentUUID": "8a86bd90-f9cc-4def-a707-c3f9380b1b4b",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "4f0b9731-835f-47f5-9457-96de9128bb07",
-                "bbc09df6-d578-4d9b-8ef9-7c74e3341aa8",
-                "6b14cfc4-6caf-4f28-b0b2-eefa15a4a439"
+                "117f386e-dffa-4c8c-9565-cfa208817710",
+                "2a9ff94b-b29f-474c-bc75-e6511f029a4e",
+                "800c93dc-50f9-4dac-b045-8518b41a2ab0",
+                "8a61588c-26d4-4c0d-8108-e21b5deef60b",
+                "316745b2-d8e5-4b2f-bcde-f6c0273e6487",
+                "1f642701-1812-41d2-ae75-9c1948a13e5d"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 14,
+              "duration": 21,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 10000
+            },
+            {
+              "uuid": "d75f99c2-8113-4aa2-84da-c70d18f3a470",
+              "title": "GET /transfers",
+              "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/controller/transferController.test.js",
+              "file": "/test/controller/transferController.test.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook in \"GET /transfers\"",
+                  "fullTitle": "Transfer Controller GET /transfers \"before each\" hook in \"GET /transfers\"",
+                  "timedOut": false,
+                  "duration": 23,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "// 1) Capturar o Token\nconst respostaLogin = await request(app)\n    .post('/users/login')\n    .send({\n        username: 'julio',\n        password: '123456'\n        });\n        \n        token = respostaLogin.body.token;",
+                  "err": {},
+                  "uuid": "b66b554a-e197-4879-82f3-657df38c3acf",
+                  "parentUUID": "d75f99c2-8113-4aa2-84da-c70d18f3a470",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Quando solicito as transferências tenho sucesso com 200",
+                  "fullTitle": "Transfer Controller GET /transfers Quando solicito as transferências tenho sucesso com 200",
+                  "timedOut": false,
+                  "duration": 3,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const resposta = await request(app)\n    .get('/transfers')\n    .set('Authorization', `Bearer ${token}`);\nexpect(resposta.status).to.equal(200);\nexpect(resposta.body).to.be.an('array');",
+                  "err": {},
+                  "uuid": "7b29008f-a2b6-4d2c-a64e-f406ce8354ae",
+                  "parentUUID": "d75f99c2-8113-4aa2-84da-c70d18f3a470",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "7b29008f-a2b6-4d2c-a64e-f406ce8354ae"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 3,
               "root": false,
               "rootEmpty": false,
               "_timeout": 10000
@@ -161,7 +276,7 @@
           "_timeout": 10000
         },
         {
-          "uuid": "9d1a8d74-65b5-419f-8797-13a0393d65e6",
+          "uuid": "d0abd975-0f3d-4a20-83e6-3b529d612772",
           "title": "User Controller",
           "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/controller/userController.test.js",
           "file": "/test/controller/userController.test.js",
@@ -170,11 +285,30 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "5719afca-de90-4839-81b6-1acafb218c3c",
+              "uuid": "8d7a0d01-cfd8-4926-893e-401b6479ea07",
               "title": "POST /users/register",
               "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/controller/userController.test.js",
               "file": "/test/controller/userController.test.js",
-              "beforeHooks": [],
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook in \"POST /users/register\"",
+                  "fullTitle": "User Controller POST /users/register \"before each\" hook in \"POST /users/register\"",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "userModel.users.length = 0; // Limpa o array atual\nuserModel.users.push(...JSON.parse(JSON.stringify(originalUsers))); // Restaura os dados originais",
+                  "err": {},
+                  "uuid": "9286ec14-ee3b-43c9-aa48-dde5777a5249",
+                  "parentUUID": "8d7a0d01-cfd8-4926-893e-401b6479ea07",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
               "afterHooks": [
                 {
                   "title": "\"after each\" hook in \"POST /users/register\"",
@@ -189,8 +323,8 @@
                   "context": null,
                   "code": "sinon.restore();",
                   "err": {},
-                  "uuid": "662b4e4a-0259-445c-96df-dfd73e0f17e9",
-                  "parentUUID": "5719afca-de90-4839-81b6-1acafb218c3c",
+                  "uuid": "3ac55807-dba9-4e4d-95f2-d21a4df5dbb7",
+                  "parentUUID": "8d7a0d01-cfd8-4926-893e-401b6479ea07",
                   "isHook": true,
                   "skipped": false
                 }
@@ -200,7 +334,7 @@
                   "title": "Quando informo usuario inexistentes recebo 400",
                   "fullTitle": "User Controller POST /users/register Quando informo usuario inexistentes recebo 400",
                   "timedOut": false,
-                  "duration": 3,
+                  "duration": 2,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -209,8 +343,8 @@
                   "context": null,
                   "code": "const resposta = await request(app)\n    .post('/users/register')\n    .send({\n        username: \"julio\",\n        password: \"123456\",\n        favorecidos: [\"priscila\"]\n});\n\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Usuário já existe')",
                   "err": {},
-                  "uuid": "12e31493-cd7c-4827-82a9-268e84ecdce9",
-                  "parentUUID": "5719afca-de90-4839-81b6-1acafb218c3c",
+                  "uuid": "62eb4631-cbe2-4a52-9ceb-7ea8c48941f1",
+                  "parentUUID": "8d7a0d01-cfd8-4926-893e-401b6479ea07",
                   "isHook": false,
                   "skipped": false
                 },
@@ -218,7 +352,7 @@
                   "title": "Quando informo valores válidos de usuários eu tenho sucesso com 201 CREATED",
                   "fullTitle": "User Controller POST /users/register Quando informo valores válidos de usuários eu tenho sucesso com 201 CREATED",
                   "timedOut": false,
-                  "duration": 23,
+                  "duration": 22,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -227,31 +361,50 @@
                   "context": null,
                   "code": "const resposta = await request(app)\n    .post('/users/register')\n    .send({\n        username: \"julcilea\",\n        password: \"123456\",\n        favorecidos: [\"renata\"]\n});\n\nexpect(resposta.status).to.equal(201);\nconst usuarioCriado = require('../fixture/respostas/quandoInformoValoresValidosUsuariosEuTenhoSucesso201Created.json');\nexpect(resposta.body).to.deep.equal(usuarioCriado);",
                   "err": {},
-                  "uuid": "98a3f751-4def-4bfd-b251-28497bb7c02a",
-                  "parentUUID": "5719afca-de90-4839-81b6-1acafb218c3c",
+                  "uuid": "b29fe6e0-c4c8-4ca3-8d00-0756137dbfb2",
+                  "parentUUID": "8d7a0d01-cfd8-4926-893e-401b6479ea07",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "12e31493-cd7c-4827-82a9-268e84ecdce9",
-                "98a3f751-4def-4bfd-b251-28497bb7c02a"
+                "62eb4631-cbe2-4a52-9ceb-7ea8c48941f1",
+                "b29fe6e0-c4c8-4ca3-8d00-0756137dbfb2"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 26,
+              "duration": 24,
               "root": false,
               "rootEmpty": false,
               "_timeout": 10000
             },
             {
-              "uuid": "8e8ca303-5410-4da5-981c-de43e875792a",
+              "uuid": "4d3ad00c-c016-4352-9efe-359150f5322f",
               "title": "POST /users/login",
               "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/controller/userController.test.js",
               "file": "/test/controller/userController.test.js",
-              "beforeHooks": [],
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook in \"POST /users/login\"",
+                  "fullTitle": "User Controller POST /users/login \"before each\" hook in \"POST /users/login\"",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "userModel.users.length = 0; // Limpa o array atual\nuserModel.users.push(...JSON.parse(JSON.stringify(originalUsers))); // Restaura os dados originais",
+                  "err": {},
+                  "uuid": "387aeba5-a80a-4f98-961d-5bd970fadcd7",
+                  "parentUUID": "4d3ad00c-c016-4352-9efe-359150f5322f",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
               "afterHooks": [
                 {
                   "title": "\"after each\" hook in \"POST /users/login\"",
@@ -266,8 +419,8 @@
                   "context": null,
                   "code": "sinon.restore();",
                   "err": {},
-                  "uuid": "76d8aaf6-d46a-4aa8-80bf-e3de6cdbb903",
-                  "parentUUID": "8e8ca303-5410-4da5-981c-de43e875792a",
+                  "uuid": "75df0ed2-a808-4040-8c1d-e95c5b4bf961",
+                  "parentUUID": "4d3ad00c-c016-4352-9efe-359150f5322f",
                   "isHook": true,
                   "skipped": false
                 }
@@ -286,8 +439,8 @@
                   "context": null,
                   "code": "const resposta = await request(app)\n    .post('/users/login')\n    .send({\n        username: \"maria\",\n        password: \"123456\"\n});\n\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Usuário não encontrado')",
                   "err": {},
-                  "uuid": "f1c2e298-2e1a-4931-8746-e84d2a9ed700",
-                  "parentUUID": "8e8ca303-5410-4da5-981c-de43e875792a",
+                  "uuid": "c70e046d-5b49-4317-afa6-4622353aa171",
+                  "parentUUID": "4d3ad00c-c016-4352-9efe-359150f5322f",
                   "isHook": false,
                   "skipped": false
                 },
@@ -295,7 +448,7 @@
                   "title": "Quando informo login válidos tenho sucesso com 200",
                   "fullTitle": "User Controller POST /users/login Quando informo login válidos tenho sucesso com 200",
                   "timedOut": false,
-                  "duration": 24,
+                  "duration": 23,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -304,31 +457,50 @@
                   "context": null,
                   "code": "const resposta = await request(app)\n    .post('/users/login')\n    .send({\n        username: \"julio\",\n        password: \"123456\"\n});\nexpect(resposta.status).to.equal(200);\nconst respostaLogin = require('../fixture/respostas/quandoInformoLoginValidoTenhoSucesso200.json');\ndelete resposta.body.token;\ndelete respostaLogin.token;\nexpect(resposta.body).to.deep.equal(respostaLogin);",
                   "err": {},
-                  "uuid": "dbfc7d9f-dd18-45b1-a755-a658e5bbbb49",
-                  "parentUUID": "8e8ca303-5410-4da5-981c-de43e875792a",
+                  "uuid": "49686230-e43c-40bb-a8ab-18f3a9f0ac16",
+                  "parentUUID": "4d3ad00c-c016-4352-9efe-359150f5322f",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "f1c2e298-2e1a-4931-8746-e84d2a9ed700",
-                "dbfc7d9f-dd18-45b1-a755-a658e5bbbb49"
+                "c70e046d-5b49-4317-afa6-4622353aa171",
+                "49686230-e43c-40bb-a8ab-18f3a9f0ac16"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 26,
+              "duration": 25,
               "root": false,
               "rootEmpty": false,
               "_timeout": 10000
             },
             {
-              "uuid": "31c77c1a-2228-44bd-8c0d-0f687df28a10",
+              "uuid": "c960103a-0ee2-41b8-93c5-74f86bbe9db4",
               "title": "GET /users",
               "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/controller/userController.test.js",
               "file": "/test/controller/userController.test.js",
-              "beforeHooks": [],
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook in \"GET /users\"",
+                  "fullTitle": "User Controller GET /users \"before each\" hook in \"GET /users\"",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "userModel.users.length = 0; // Limpa o array atual\nuserModel.users.push(...JSON.parse(JSON.stringify(originalUsers))); // Restaura os dados originais",
+                  "err": {},
+                  "uuid": "7dfa2293-4b05-4df6-a856-4ef97d3d8192",
+                  "parentUUID": "c960103a-0ee2-41b8-93c5-74f86bbe9db4",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
               "afterHooks": [
                 {
                   "title": "\"after each\" hook in \"GET /users\"",
@@ -343,8 +515,8 @@
                   "context": null,
                   "code": "sinon.restore();",
                   "err": {},
-                  "uuid": "dfd1fd32-52a4-4325-8577-14d6475843d0",
-                  "parentUUID": "31c77c1a-2228-44bd-8c0d-0f687df28a10",
+                  "uuid": "90734ccc-5204-49d1-b45a-e6f3aa7c7de2",
+                  "parentUUID": "c960103a-0ee2-41b8-93c5-74f86bbe9db4",
                   "isHook": true,
                   "skipped": false
                 }
@@ -354,7 +526,7 @@
                   "title": "Quando solicito os dados de usuarios tenho sucesso com 200",
                   "fullTitle": "User Controller GET /users Quando solicito os dados de usuarios tenho sucesso com 200",
                   "timedOut": false,
-                  "duration": 3,
+                  "duration": 1,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -363,20 +535,20 @@
                   "context": null,
                   "code": "const resposta = await request(app)\n    .get('/users')\n    .send();\nexpect(resposta.status).to.equal(200);\nconst respostaCadastro = require('../fixture/respostas/quandoSolicitoDadosDosUsuariosEuTenhoSucesso200.json');\nexpect(resposta.body).to.deep.equal(respostaCadastro);",
                   "err": {},
-                  "uuid": "87c5ed45-c67d-4ed8-be82-e3ba08bc1108",
-                  "parentUUID": "31c77c1a-2228-44bd-8c0d-0f687df28a10",
+                  "uuid": "7cc3821a-c9e8-4b3c-9fb2-57a68acf7d12",
+                  "parentUUID": "c960103a-0ee2-41b8-93c5-74f86bbe9db4",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "87c5ed45-c67d-4ed8-be82-e3ba08bc1108"
+                "7cc3821a-c9e8-4b3c-9fb2-57a68acf7d12"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 3,
+              "duration": 1,
               "root": false,
               "rootEmpty": false,
               "_timeout": 10000
