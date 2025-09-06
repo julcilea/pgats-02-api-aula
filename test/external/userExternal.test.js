@@ -10,7 +10,7 @@ const app = require('../../app');
 const userService = require('../../service/userService');
 
 // Testes
-describe('User', () => {
+describe('User external', () => {
     describe('POST /users/register', () => {
 
         it('Quando informo usuario inexistentes recebo 400', async () => {
