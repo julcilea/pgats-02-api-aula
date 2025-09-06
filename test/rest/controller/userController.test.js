@@ -28,8 +28,8 @@ describe('User Controller', () => {
                     username: "julio",
                     password: "123456",
                     favorecidos: ["priscila"]
-            });
-            
+                });
+
             expect(resposta.status).to.equal(400);
             expect(resposta.body).to.have.property('error', 'Usuário já existe')
         });
@@ -41,10 +41,10 @@ describe('User Controller', () => {
                     username: "julcilea",
                     password: "123456",
                     favorecidos: ["renata"]
-            });
-            
+                });
+
             expect(resposta.status).to.equal(201);
-            const usuarioCriado = require('../../fixture/respostas/quandoInformoValoresValidosUsuariosEuTenhoSucesso201Created.json');
+            const usuarioCriado = require('../fixture/respostas/quandoInformoValoresValidosUsuariosEuTenhoSucesso201Created.json');
             expect(resposta.body).to.deep.equal(usuarioCriado);
 
         });
@@ -67,8 +67,8 @@ describe('User Controller', () => {
                 .send({
                     username: "maria",
                     password: "123456"
-            });
-            
+                });
+
             expect(resposta.status).to.equal(400);
             expect(resposta.body).to.have.property('error', 'Usuário não encontrado')
         });
@@ -79,10 +79,10 @@ describe('User Controller', () => {
                 .send({
                     username: "julio",
                     password: "123456"
-            });
+                });
 
             expect(resposta.status).to.equal(200);
-            const respostaLogin = require('../../fixture/respostas/quandoInformoLoginValidoTenhoSucesso200.json');
+            const respostaLogin = require('../fixture/respostas/quandoInformoLoginValidoTenhoSucesso200.json');
             delete resposta.body.token;
             delete respostaLogin.token;
             expect(resposta.body).to.deep.equal(respostaLogin);
@@ -107,7 +107,7 @@ describe('User Controller', () => {
                 .send();
 
             expect(resposta.status).to.equal(200);
-            const respostaCadastro = require('../../fixture/respostas/quandoSolicitoDadosDosUsuariosEuTenhoSucesso200.json');
+            const respostaCadastro = require('../fixture/respostas/quandoSolicitoDadosDosUsuariosEuTenhoSucesso200.json');
             expect(resposta.body).to.deep.equal(respostaCadastro);
 
         });

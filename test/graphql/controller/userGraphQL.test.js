@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const app = require('../../graphql/app');
+const app = require('../../../graphql/app');
 
 describe('GraphQL User Mutations & Queries', () => {
   let token;
