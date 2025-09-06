@@ -1,0 +1,162 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-09-06T18:39:47.584Z",
+    "end": "2025-09-06T18:39:47.664Z",
+    "duration": 80,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "32313c33-f8e2-45c9-b7be-f34a3941b4ba",
+      "title": "",
+      "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/graphql/external/transferGraphQLExternal.test.js",
+      "file": "/test/graphql/external/transferGraphQLExternal.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a8182a1a-e54c-45df-9a5d-eb66ca7c7830",
+          "title": "GraphQL Transfer Mutations external",
+          "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/graphql/external/transferGraphQLExternal.test.js",
+          "file": "/test/graphql/external/transferGraphQLExternal.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"GraphQL Transfer Mutations external\"",
+              "fullTitle": "GraphQL Transfer Mutations external \"before all\" hook in \"GraphQL Transfer Mutations external\"",
+              "timedOut": false,
+              "duration": 62,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const loginUser = require('../fixture/require/login/loginUser.json');\nconst resposta = await request('http://localhost:4000/graphql')\n  .post('')\n  .send(loginUser);\nif (resposta.body.errors) {\n  console.error('Erro ao fazer login:', resposta.body.errors);\n  throw new Error('Falha no login, verifique os dados de login ou o userService.js');\n}\ntoken = resposta.body.data.loginUser.token;",
+              "err": {},
+              "uuid": "a4edbc15-076d-48f6-8797-9055bd66feb2",
+              "parentUUID": "a8182a1a-e54c-45df-9a5d-eb66ca7c7830",
+              "isHook": true,
+              "skipped": false
+            },
+            {
+              "title": "\"before each\" hook in \"GraphQL Transfer Mutations external\"",
+              "fullTitle": "GraphQL Transfer Mutations external \"before each\" hook in \"GraphQL Transfer Mutations external\"",
+              "timedOut": false,
+              "duration": 0,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "createTransfer = require('../fixture/require/transfer/createTransfer.json');",
+              "err": {},
+              "uuid": "288e90ec-d1df-41a3-9f9a-d0430c234abb",
+              "parentUUID": "a8182a1a-e54c-45df-9a5d-eb66ca7c7830",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Validar que transferencia entre dois usuarios com sucesso",
+              "fullTitle": "GraphQL Transfer Mutations external Validar que transferencia entre dois usuarios com sucesso",
+              "timedOut": false,
+              "duration": 9,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const responsaEsperada = require('../fixture/response/transfer/ValidarQueTransferenciaEntreDoisUsuariosComSucesso.json');\nconst respostaTransferencia = await request('http://localhost:4000/graphql')\n  .post('')\n  .set('Authorization', `Bearer ${token}`)\n  .send(createTransfer);\nexpect(respostaTransferencia.status).to.equal(200);\nexpect(respostaTransferencia.body.data.createTransfer).excluding('date').to.deep.equal(responsaEsperada.data.createTransfer);",
+              "err": {},
+              "uuid": "f8d0cc13-5894-49d5-bdd1-1bdc33bc7e4a",
+              "parentUUID": "a8182a1a-e54c-45df-9a5d-eb66ca7c7830",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validar que não é possivel transferir de uma conta sem saldo suficiente",
+              "fullTitle": "GraphQL Transfer Mutations external Validar que não é possivel transferir de uma conta sem saldo suficiente",
+              "timedOut": false,
+              "duration": 5,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "createTransfer.variables.value = 10000.01;\nconst responsaEsperada = require('../fixture/response/transfer/ValidarNaoEPossivelTransferirDeUmaContaSemSaldoSuficiente.json');\nconst respostaTransferencia = await request('http://localhost:4000/graphql')\n  .post('')\n  .set('Authorization', `Bearer ${token}`)\n  .send(createTransfer);\nexpect(respostaTransferencia.status).to.equal(200);\nexpect(respostaTransferencia.body.errors[0].message).to.deep.equal(responsaEsperada.errors[0].message);",
+              "err": {},
+              "uuid": "e8b9cfbb-7b12-4cdb-b517-61c142a2e3e5",
+              "parentUUID": "a8182a1a-e54c-45df-9a5d-eb66ca7c7830",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f8d0cc13-5894-49d5-bdd1-1bdc33bc7e4a",
+            "e8b9cfbb-7b12-4cdb-b517-61c142a2e3e5"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 14,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "report-graphql-external",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "./",
+        "reportFilename": "report-graphql-external",
+        "overwrite": "true",
+        "html": "true",
+        "json": "true"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

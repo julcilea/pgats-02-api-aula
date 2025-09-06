@@ -5,9 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha 'test/**/*.test.js' --timeout 10000 --reporter mochawesome",
-    "test-controller": "mocha 'test/controller/**/*.test.js' --timeout 10000 --reporter mochawesome --reporter-options reportDir=./,reportFilename=report1,overwrite=true,html=true,json=true",
-    "test-external": "mocha 'test/external/**/*.test.js' --timeout 10000 --reporter mochawesome --reporter-options reportDir=./,reportFilename=report,overwrite=true,html=true,json=true",
-    "test-graphql": "mocha 'test/external-graphql/**/*.test.js' --timeout 10000 --reporter mochawesome --reporter-options reportDir=./,reportFilename=report-graphql,overwrite=true,html=true,json=true",
+    "test-controller": "mocha 'test/rest/controller/**/*.test.js' --timeout 10000 --reporter mochawesome --reporter-options reportDir=./,reportFilename=report1,overwrite=true,html=true,json=true",
+    "test-external": "mocha 'test/rest/external/**/*.test.js' --timeout 10000 --reporter mochawesome --reporter-options reportDir=./,reportFilename=report,overwrite=true,html=true,json=true",
+    "test-graphql": "mocha 'test/graphql/controller/**/*.test.js' --timeout 10000 --reporter mochawesome --reporter-options reportDir=./,reportFilename=report-graphql,overwrite=true,html=true,json=true",
+    "test-graphql-external": "mocha 'test/graphql/external/**/*.test.js' --timeout 10000 --reporter mochawesome --reporter-options reportDir=./,reportFilename=report-graphql-external,overwrite=true,html=true,json=true",
     "start": "node server.js",
     "start-graphql": "node graphql/server.js"
   },
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "chai": "4.5.0",
+    "chai-exclude": "^2.1.1",
     "jsonwebtoken": "^9.0.2",
     "mocha": "^11.7.1",
     "mochawesome": "^7.1.3",

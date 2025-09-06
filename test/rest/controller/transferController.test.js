@@ -4,27 +4,27 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 
 // Aplicação
-const app = require('../../app');
+const app = require('../../../app');
 
 // Mock
-const transferService = require('../../service/transferService');
+const transferService = require('../../../service/transferService');
 
 // Testes
 describe('Transfer Controller', () => {
     describe('POST /transfers', () => {
 
         let token = null;
-        
-        beforeEach(async() => {
+
+        beforeEach(async () => {
             // 1) Capturar o Token
             const respostaLogin = await request(app)
                 .post('/users/login')
                 .send({
                     username: 'julio',
                     password: '123456'
-        });
-                    
-        token = respostaLogin.body.token;
+                });
+
+            token = respostaLogin.body.token;
 
         });
 
@@ -37,7 +37,7 @@ describe('Transfer Controller', () => {
                     to: "maria",
                     value: 100
                 });
-            
+
             expect(resposta.status).to.equal(400);
             expect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado')
         });
@@ -55,7 +55,7 @@ describe('Transfer Controller', () => {
                     to: "priscila",
                     value: 100
                 });
-            
+
             expect(resposta.status).to.equal(400);
             expect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado')
 
@@ -64,11 +64,11 @@ describe('Transfer Controller', () => {
         it('Usando Mocks: Quando informo valores válidos eu tenho sucesso com 201 CREATED', async () => {
             // Mocar apenas a função transfer do Service
             const transferServiceMock = sinon.stub(transferService, 'transfer');
-            transferServiceMock.returns({ 
-                from: "julio", 
-                to: "priscila", 
-                value: 100, 
-                date: new Date().toISOString() 
+            transferServiceMock.returns({
+                from: "julio",
+                to: "priscila",
+                value: 100,
+                date: new Date().toISOString()
             });
 
             const resposta = await request(app)
@@ -79,13 +79,13 @@ describe('Transfer Controller', () => {
                     to: "priscilaaaaaaaaaaa",
                     value: 100
                 });
-            
+
             expect(resposta.status).to.equal(201);
-            
+
             // Validação com um Fixture
             const respostaEsperada = require('../fixture/respostas/quandoInformoValoresValidosEuTenhoSucessoCom201Created.json')
             delete resposta.body.date;
-            delete respostaEsperada.date; 
+            delete respostaEsperada.date;
             expect(resposta.body).to.deep.equal(respostaEsperada);
 
             // Um expect para comparar a Resposta.body com a String contida no arquivo
@@ -100,7 +100,7 @@ describe('Transfer Controller', () => {
                 .set('Authorization', `Bearer ${token}`)
                 .send({
                     from: "julio",
-                    to: "renata", 
+                    to: "renata",
                     value: 5000.01
                 });
 
@@ -146,20 +146,20 @@ describe('Transfer Controller', () => {
 
     describe('GET /transfers', () => {
         let token = null;
-        
-        beforeEach(async() => {
+
+        beforeEach(async () => {
             // 1) Capturar o Token
             const respostaLogin = await request(app)
                 .post('/users/login')
                 .send({
                     username: 'julio',
                     password: '123456'
-        });
-                    
-        token = respostaLogin.body.token;
+                });
+
+            token = respostaLogin.body.token;
 
         });
-        
+
         it('Quando solicito as transferências tenho sucesso com 200', async () => {
             const resposta = await request(app)
                 .get('/transfers')

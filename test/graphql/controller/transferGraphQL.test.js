@@ -1,14 +1,14 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const app = require('../../graphql/app');
+const app = require('../../../graphql/app');
 
 describe('GraphQL Transfer Mutations', () => {
   let token = null;
 
   // Antes de todos os testes, realiza login e captura token
   before(async () => {
-  const loginMutation = {
-    query: `
+    const loginMutation = {
+      query: `
       mutation LoginUser($username: String!, $password: String!) {
         loginUser(username: $username, password: $password) {
           token
@@ -18,23 +18,23 @@ describe('GraphQL Transfer Mutations', () => {
         }
       }
     `,
-    variables: {
-      username: "julio",
-      password: "123456"
-    }
-  };
+      variables: {
+        username: "julio",
+        password: "123456"
+      }
+    };
 
-  const res = await request(app)
-    .post('/graphql')
-    .send(loginMutation);
+    const res = await request(app)
+      .post('/graphql')
+      .send(loginMutation);
 
     if (res.body.errors) {
-        console.error('Erro ao fazer login:', res.body.errors);
-        throw new Error('Falha no login, verifique os dados de login ou o userService.js');
+      console.error('Erro ao fazer login:', res.body.errors);
+      throw new Error('Falha no login, verifique os dados de login ou o userService.js');
     }
 
     token = res.body.data.loginUser.token;
-});
+  });
 
   it('Remetente ou destinatário inexistentes retorna erro', async () => {
     const createTransferMutation = {
@@ -119,9 +119,9 @@ describe('GraphQL Transfer Mutations', () => {
             }
           }
         `
-    });
-    
-    expect(response.status).to.equal(200); 
+      });
+
+    expect(response.status).to.equal(200);
     expect(response.body.errors).to.be.an('array');
     expect(response.body.errors[0].message).to.equal('Saldo insuficiente');
   });
@@ -140,9 +140,9 @@ describe('GraphQL Transfer Mutations', () => {
             }
           }
         `
-    });
-    
-    expect(response.status).to.equal(200); 
+      });
+
+    expect(response.status).to.equal(200);
     expect(response.body.errors).to.be.an('array');
     expect(response.body.errors[0].message).to.equal(
       'Transferência acima de R$ 5.000,00 só para favorecidos'
@@ -163,7 +163,7 @@ describe('GraphQL Transfer Mutations', () => {
             }
           }
         `
-    });
+      });
 
     expect(response.status).to.equal(200);
     expect(response.body.data.createTransfer).to.have.property('from', 'julio');

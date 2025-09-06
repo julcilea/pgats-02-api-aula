@@ -4,11 +4,11 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 
 // Aplicação
-const app = require('../../app');
+const app = require('../../../app');
 
 // Mock
-const userService = require('../../service/userService');
-const userModel = require('../../model/userModel');
+const userService = require('../../../service/userService');
+const userModel = require('../../../model/userModel');
 const originalUsers = JSON.parse(JSON.stringify(userModel.users));
 
 // Testes
@@ -28,8 +28,8 @@ describe('User Controller', () => {
                     username: "julio",
                     password: "123456",
                     favorecidos: ["priscila"]
-            });
-            
+                });
+
             expect(resposta.status).to.equal(400);
             expect(resposta.body).to.have.property('error', 'Usuário já existe')
         });
@@ -41,8 +41,8 @@ describe('User Controller', () => {
                     username: "julcilea",
                     password: "123456",
                     favorecidos: ["renata"]
-            });
-            
+                });
+
             expect(resposta.status).to.equal(201);
             const usuarioCriado = require('../fixture/respostas/quandoInformoValoresValidosUsuariosEuTenhoSucesso201Created.json');
             expect(resposta.body).to.deep.equal(usuarioCriado);
@@ -67,8 +67,8 @@ describe('User Controller', () => {
                 .send({
                     username: "maria",
                     password: "123456"
-            });
-            
+                });
+
             expect(resposta.status).to.equal(400);
             expect(resposta.body).to.have.property('error', 'Usuário não encontrado')
         });
@@ -79,7 +79,7 @@ describe('User Controller', () => {
                 .send({
                     username: "julio",
                     password: "123456"
-            });
+                });
 
             expect(resposta.status).to.equal(200);
             const respostaLogin = require('../fixture/respostas/quandoInformoLoginValidoTenhoSucesso200.json');

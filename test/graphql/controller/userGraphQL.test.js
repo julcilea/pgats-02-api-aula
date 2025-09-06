@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const app = require('../../graphql/app');
+const app = require('../../../graphql/app');
 
 describe('GraphQL User Mutations & Queries', () => {
   let token;
@@ -110,7 +110,6 @@ describe('GraphQL User Mutations & Queries', () => {
       expect(res.body.data.users).to.be.an('array');
       expect(res.body.data.users[0]).to.have.property('username');
     });
-
   });
 
 });
