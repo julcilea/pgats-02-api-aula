@@ -8,10 +8,18 @@ const app = require('../../app');
 
 // Mock
 const userService = require('../../service/userService');
+const userModel = require('../../model/userModel');
+const originalUsers = JSON.parse(JSON.stringify(userModel.users));
 
 // Testes
 describe('User Controller', () => {
+
     describe('POST /users/register', () => {
+
+        beforeEach(() => {
+            userModel.users.length = 0; // Limpa o array atual
+            userModel.users.push(...JSON.parse(JSON.stringify(originalUsers))); // Restaura os dados originais
+        });
 
         it('Quando informo usuario inexistentes recebo 400', async () => {
             const resposta = await request(app)
@@ -48,6 +56,11 @@ describe('User Controller', () => {
 
     describe('POST /users/login', () => {
 
+        beforeEach(() => {
+            userModel.users.length = 0; // Limpa o array atual
+            userModel.users.push(...JSON.parse(JSON.stringify(originalUsers))); // Restaura os dados originais
+        });
+
         it('Quando informo login inexistentes recebo 400', async () => {
             const resposta = await request(app)
                 .post('/users/login')
@@ -82,6 +95,11 @@ describe('User Controller', () => {
     });
 
     describe('GET /users', () => {
+
+        beforeEach(() => {
+            userModel.users.length = 0; // Limpa o array atual
+            userModel.users.push(...JSON.parse(JSON.stringify(originalUsers))); // Restaura os dados originais
+        });
 
         it('Quando solicito os dados de usuarios tenho sucesso com 200', async () => {
             const resposta = await request(app)
