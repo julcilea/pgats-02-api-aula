@@ -4,12 +4,14 @@ const { expect, use } = require('chai');
 const chaiExclude = require('chai-exclude');
 use(chaiExclude);
 
+require('dotenv').config();
+
 
 describe('GraphQL Transfer Mutations external', () => {
 
   before(async () => {
     const loginUser = require('../fixture/require/login/loginUser.json');
-    const resposta = await request('http://localhost:4000/graphql')
+    const resposta = await request(process.env.BASE_URL_GRAPHQL)
       .post('')
       .send(loginUser);
 
@@ -28,7 +30,7 @@ describe('GraphQL Transfer Mutations external', () => {
 
   it('Validar que transferencia entre dois usuarios com sucesso', async () => {
     const responsaEsperada = require('../fixture/response/transfer/ValidarQueTransferenciaEntreDoisUsuariosComSucesso.json');
-    const respostaTransferencia = await request('http://localhost:4000/graphql')
+    const respostaTransferencia = await request(process.env.BASE_URL_GRAPHQL)
       .post('')
       .set('Authorization', `Bearer ${token}`)
       .send(createTransfer);
@@ -42,7 +44,7 @@ describe('GraphQL Transfer Mutations external', () => {
     createTransfer.variables.value = 10000.01;
     const responsaEsperada = require('../fixture/response/transfer/ValidarNaoEPossivelTransferirDeUmaContaSemSaldoSuficiente.json');
 
-    const respostaTransferencia = await request('http://localhost:4000/graphql')
+    const respostaTransferencia = await request(process.env.BASE_URL_GRAPHQL)
       .post('')
       .set('Authorization', `Bearer ${token}`)
       .send(createTransfer);
