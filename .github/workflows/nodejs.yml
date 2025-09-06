@@ -62,8 +62,8 @@ jobs:
     - name: Exibir links dos relatórios no Summary
       run: |
         echo "## ✅ Relatórios Mochawesome Gerados!" >> $GITHUB_STEP_SUMMARY
-        echo "🔗 [Relatório Controller](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report1.html)" >> $GITHUB_STEP_SUMMARY
-        echo "🔗 [Relatório HTTP](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report.html)" >> $GITHUB_STEP_SUMMARY
-        echo "🔗 [Relatório GraphQL](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report-graphql.html)" >> $GITHUB_STEP_SUMMARY
-        echo "🔗 [Relatório GraphQL External](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report-graphql-external.html)" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 [Relatório Rest Controller](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report1.html)" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 [Relatório Rest HTTP](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report.html)" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 [Relatório GraphQL Controller](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report-graphql.html)" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 [Relatório GraphQL HTTP](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/report-graphql-external.html)" >> $GITHUB_STEP_SUMMARY
         
