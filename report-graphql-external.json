@@ -5,9 +5,9 @@
     "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2025-09-06T20:13:23.706Z",
-    "end": "2025-09-06T20:13:23.784Z",
-    "duration": 78,
+    "start": "2025-09-06T20:15:27.472Z",
+    "end": "2025-09-06T20:15:27.551Z",
+    "duration": 79,
     "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "65dd5111-59a8-46d3-994e-f9cc433f4f4c",
+      "uuid": "3d115549-73ca-4dcd-91bb-6648b0f08695",
       "title": "",
       "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/graphql/external/transferGraphQLExternal.test.js",
       "file": "/test/graphql/external/transferGraphQLExternal.test.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "25bcad57-62ea-4438-9c9a-643fee864aa6",
+          "uuid": "45eed85a-1fc5-4e3f-8dd5-ff663454e05d",
           "title": "GraphQL Transfer Mutations external",
           "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/graphql/external/transferGraphQLExternal.test.js",
           "file": "/test/graphql/external/transferGraphQLExternal.test.js",
@@ -36,7 +36,7 @@
               "title": "\"before all\" hook in \"GraphQL Transfer Mutations external\"",
               "fullTitle": "GraphQL Transfer Mutations external \"before all\" hook in \"GraphQL Transfer Mutations external\"",
               "timedOut": false,
-              "duration": 61,
+              "duration": 62,
               "state": null,
               "speed": null,
               "pass": false,
@@ -45,8 +45,8 @@
               "context": null,
               "code": "const loginUser = require('../fixture/require/login/loginUser.json');\nconst resposta = await request(process.env.BASE_URL_GRAPHQL)\n  .post('')\n  .send(loginUser);\nif (resposta.body.errors) {\n  console.error('Erro ao fazer login:', resposta.body.errors);\n  throw new Error('Falha no login, verifique os dados de login ou o userService.js');\n}\ntoken = resposta.body.data.loginUser.token;",
               "err": {},
-              "uuid": "c36bd53a-ea95-4894-aa09-e8b8abaec24a",
-              "parentUUID": "25bcad57-62ea-4438-9c9a-643fee864aa6",
+              "uuid": "656d4ac0-780c-4e72-9cac-ba767674ae8d",
+              "parentUUID": "45eed85a-1fc5-4e3f-8dd5-ff663454e05d",
               "isHook": true,
               "skipped": false
             },
@@ -63,8 +63,8 @@
               "context": null,
               "code": "createTransfer = require('../fixture/require/transfer/createTransfer.json');",
               "err": {},
-              "uuid": "291877dc-1c6a-4ec4-86c9-685e72eb8ab5",
-              "parentUUID": "25bcad57-62ea-4438-9c9a-643fee864aa6",
+              "uuid": "9e33ce89-314b-4b83-9a90-cbf384e655ff",
+              "parentUUID": "45eed85a-1fc5-4e3f-8dd5-ff663454e05d",
               "isHook": true,
               "skipped": false
             }
@@ -84,8 +84,8 @@
               "context": null,
               "code": "const responsaEsperada = require('../fixture/response/transfer/ValidarQueTransferenciaEntreDoisUsuariosComSucesso.json');\nconst respostaTransferencia = await request(process.env.BASE_URL_GRAPHQL)\n  .post('')\n  .set('Authorization', `Bearer ${token}`)\n  .send(createTransfer);\nexpect(respostaTransferencia.status).to.equal(200);\nexpect(respostaTransferencia.body.data.createTransfer).excluding('date').to.deep.equal(responsaEsperada.data.createTransfer);",
               "err": {},
-              "uuid": "adc0ef36-8b2b-401a-84bb-d5b8ebc4eee2",
-              "parentUUID": "25bcad57-62ea-4438-9c9a-643fee864aa6",
+              "uuid": "29a1ba4a-aec7-459a-bbfa-b870d8b2647b",
+              "parentUUID": "45eed85a-1fc5-4e3f-8dd5-ff663454e05d",
               "isHook": false,
               "skipped": false
             },
@@ -93,7 +93,7 @@
               "title": "Validar que não é possivel transferir de uma conta sem saldo suficiente",
               "fullTitle": "GraphQL Transfer Mutations external Validar que não é possivel transferir de uma conta sem saldo suficiente",
               "timedOut": false,
-              "duration": 4,
+              "duration": 5,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -102,21 +102,21 @@
               "context": null,
               "code": "createTransfer.variables.value = 10000.01;\nconst responsaEsperada = require('../fixture/response/transfer/ValidarNaoEPossivelTransferirDeUmaContaSemSaldoSuficiente.json');\nconst respostaTransferencia = await request(process.env.BASE_URL_GRAPHQL)\n  .post('')\n  .set('Authorization', `Bearer ${token}`)\n  .send(createTransfer);\nexpect(respostaTransferencia.status).to.equal(200);\nexpect(respostaTransferencia.body.errors[0].message).to.deep.equal(responsaEsperada.errors[0].message);",
               "err": {},
-              "uuid": "3d9758f6-3166-4a54-b5a7-db2bc7967e46",
-              "parentUUID": "25bcad57-62ea-4438-9c9a-643fee864aa6",
+              "uuid": "57c5fcb9-9601-4549-891f-f2077a11e414",
+              "parentUUID": "45eed85a-1fc5-4e3f-8dd5-ff663454e05d",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "adc0ef36-8b2b-401a-84bb-d5b8ebc4eee2",
-            "3d9758f6-3166-4a54-b5a7-db2bc7967e46"
+            "29a1ba4a-aec7-459a-bbfa-b870d8b2647b",
+            "57c5fcb9-9601-4549-891f-f2077a11e414"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 12,
+          "duration": 13,
           "root": false,
           "rootEmpty": false,
           "_timeout": 10000

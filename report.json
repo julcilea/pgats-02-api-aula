@@ -5,8 +5,8 @@
     "passes": 7,
     "pending": 0,
     "failures": 0,
-    "start": "2025-09-06T20:13:12.391Z",
-    "end": "2025-09-06T20:13:12.536Z",
+    "start": "2025-09-06T20:15:16.184Z",
+    "end": "2025-09-06T20:15:16.329Z",
     "duration": 145,
     "testsRegistered": 7,
     "passPercent": 100,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "ea684627-a833-4b11-9c6a-8722fa2527b6",
+      "uuid": "3f958be2-1982-4532-b1fb-10c98ee80920",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "97a9299f-1930-4338-97e2-b689abf243ad",
+          "uuid": "6f5d5f22-791a-46e7-a935-e38a979768a5",
           "title": "Transfer external",
           "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/rest/external/transferExternal.test.js",
           "file": "/test/rest/external/transferExternal.test.js",
@@ -36,7 +36,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "bc0a6f2f-96e0-43e2-b544-738c465f1050",
+              "uuid": "64cf5327-449c-4835-91b4-cf49c5dd0f43",
               "title": "POST /transfers",
               "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/rest/external/transferExternal.test.js",
               "file": "/test/rest/external/transferExternal.test.js",
@@ -45,7 +45,7 @@
                   "title": "\"before each\" hook in \"POST /transfers\"",
                   "fullTitle": "Transfer external POST /transfers \"before each\" hook in \"POST /transfers\"",
                   "timedOut": false,
-                  "duration": 23,
+                  "duration": 24,
                   "state": null,
                   "speed": null,
                   "pass": false,
@@ -54,8 +54,8 @@
                   "context": null,
                   "code": "// 1) Capturar o Token\nconst respostaLogin = await request(process.env.BASE_URL_REST)\n    .post('/users/login')\n    .send({\n        username: 'julio',\n        password: '123456'\n    });\ntoken = respostaLogin.body.token;",
                   "err": {},
-                  "uuid": "c0a3c5a9-3f6a-453f-8e0b-c33573cc50a7",
-                  "parentUUID": "bc0a6f2f-96e0-43e2-b544-738c465f1050",
+                  "uuid": "88b51975-aaad-4b2b-bf8f-6c1553eeebfc",
+                  "parentUUID": "64cf5327-449c-4835-91b4-cf49c5dd0f43",
                   "isHook": true,
                   "skipped": false
                 }
@@ -66,7 +66,7 @@
                   "title": "Quando informo remetente e destinatario inexistentes recebo 400",
                   "fullTitle": "Transfer external POST /transfers Quando informo remetente e destinatario inexistentes recebo 400",
                   "timedOut": false,
-                  "duration": 6,
+                  "duration": 5,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -75,8 +75,8 @@
                   "context": null,
                   "code": "// 2) Realizar a Transferência\nconst resposta = await request(process.env.BASE_URL_REST)\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"julio\",\n        to: \"isabelle\",\n        value: 100\n    });\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado')",
                   "err": {},
-                  "uuid": "0b06b4a7-c1c5-4f90-9882-d2a45eca2b49",
-                  "parentUUID": "bc0a6f2f-96e0-43e2-b544-738c465f1050",
+                  "uuid": "adfbd0aa-a7c4-42be-80f2-3e7960fb7238",
+                  "parentUUID": "64cf5327-449c-4835-91b4-cf49c5dd0f43",
                   "isHook": false,
                   "skipped": false
                 },
@@ -93,8 +93,8 @@
                   "context": null,
                   "code": "const resposta = await request(process.env.BASE_URL_REST)\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"jose\",\n        to: \"isabelle\",\n        value: 100\n    });\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Usuário remetente ou destinatário não encontrado');",
                   "err": {},
-                  "uuid": "7febed64-e5ea-4029-a545-c9cb818c2a8b",
-                  "parentUUID": "bc0a6f2f-96e0-43e2-b544-738c465f1050",
+                  "uuid": "43dfa90f-a8f8-429a-a741-269c243173a5",
+                  "parentUUID": "64cf5327-449c-4835-91b4-cf49c5dd0f43",
                   "isHook": false,
                   "skipped": false
                 },
@@ -111,22 +111,22 @@
                   "context": null,
                   "code": "const resposta = await request(process.env.BASE_URL_REST)\n    .post('/transfers')\n    .set('Authorization', `Bearer ${token}`)\n    .send({\n        from: \"julio\",\n        to: \"priscila\",\n        value: 100\n    });\nexpect(resposta.status).to.equal(201);\n// Validação com um Fixture\nconst respostaEsperada = require('../fixture/respostas/quandoInformoValoresValidosEuTenhoSucessoCom201Created.json')\ndelete resposta.body.date;\ndelete respostaEsperada.date;\nexpect(resposta.body).to.deep.equal(respostaEsperada);",
                   "err": {},
-                  "uuid": "06c154f5-5962-4f3c-8c0b-2e7113cc8777",
-                  "parentUUID": "bc0a6f2f-96e0-43e2-b544-738c465f1050",
+                  "uuid": "8743bc5f-9d9d-4aa7-851e-28c21a2b10a8",
+                  "parentUUID": "64cf5327-449c-4835-91b4-cf49c5dd0f43",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "0b06b4a7-c1c5-4f90-9882-d2a45eca2b49",
-                "7febed64-e5ea-4029-a545-c9cb818c2a8b",
-                "06c154f5-5962-4f3c-8c0b-2e7113cc8777"
+                "adfbd0aa-a7c4-42be-80f2-3e7960fb7238",
+                "43dfa90f-a8f8-429a-a741-269c243173a5",
+                "8743bc5f-9d9d-4aa7-851e-28c21a2b10a8"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 12,
+              "duration": 11,
               "root": false,
               "rootEmpty": false,
               "_timeout": 10000
@@ -142,7 +142,7 @@
           "_timeout": 10000
         },
         {
-          "uuid": "caf2af7b-d1ee-4738-b733-e7c594536c4b",
+          "uuid": "262e4844-c347-4366-8296-8c51fc12a553",
           "title": "User external",
           "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/rest/external/userExternal.test.js",
           "file": "/test/rest/external/userExternal.test.js",
@@ -151,7 +151,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "a90fba36-2bf4-484d-a7cd-8e9200d245f4",
+              "uuid": "a4254473-d7bb-4675-9c84-fb980bd02e70",
               "title": "POST /users/register",
               "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/rest/external/userExternal.test.js",
               "file": "/test/rest/external/userExternal.test.js",
@@ -171,15 +171,15 @@
                   "context": null,
                   "code": "const resposta = await request(process.env.BASE_URL_REST)\n    .post('/users/register')\n    .send({\n        username: \"julio\",\n        password: \"123456\",\n        favorecidos: [\"camila\"]\n    });\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Usuário já existe')",
                   "err": {},
-                  "uuid": "308893d4-898d-4281-b844-593fff34271c",
-                  "parentUUID": "a90fba36-2bf4-484d-a7cd-8e9200d245f4",
+                  "uuid": "a1662ed7-6e94-4b3a-a35c-5475f45664f6",
+                  "parentUUID": "a4254473-d7bb-4675-9c84-fb980bd02e70",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "308893d4-898d-4281-b844-593fff34271c"
+                "a1662ed7-6e94-4b3a-a35c-5475f45664f6"
               ],
               "failures": [],
               "pending": [],
@@ -190,7 +190,7 @@
               "_timeout": 10000
             },
             {
-              "uuid": "665c8c60-6ff9-4800-a4b7-5f2fb5835081",
+              "uuid": "ee569a3a-ff6f-43a0-8deb-aac62bcf86b2",
               "title": "POST /users/login",
               "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/rest/external/userExternal.test.js",
               "file": "/test/rest/external/userExternal.test.js",
@@ -201,7 +201,7 @@
                   "title": "Quando informo login inexistentes recebo 400",
                   "fullTitle": "User external POST /users/login Quando informo login inexistentes recebo 400",
                   "timedOut": false,
-                  "duration": 2,
+                  "duration": 1,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -210,8 +210,8 @@
                   "context": null,
                   "code": "const resposta = await request(process.env.BASE_URL_REST)\n    .post('/users/login')\n    .send({\n        username: \"jansen\",\n        password: \"126\"\n    });\nexpect(resposta.status).to.equal(400);\nexpect(resposta.body).to.have.property('error', 'Usuário não encontrado')",
                   "err": {},
-                  "uuid": "464a50d2-ad2f-44d9-b230-e8330ec9dcf9",
-                  "parentUUID": "665c8c60-6ff9-4800-a4b7-5f2fb5835081",
+                  "uuid": "be46ece2-38ea-4d99-a3bc-c4a5a5e27ace",
+                  "parentUUID": "ee569a3a-ff6f-43a0-8deb-aac62bcf86b2",
                   "isHook": false,
                   "skipped": false
                 },
@@ -228,27 +228,27 @@
                   "context": null,
                   "code": "const resposta = await request(process.env.BASE_URL_REST)\n    .post('/users/login')\n    .send({\n        username: \"julio\",\n        password: \"123456\"\n    });\nexpect(resposta.status).to.equal(200);",
                   "err": {},
-                  "uuid": "1fa99585-a3b9-4c20-8749-9c8cdbf05d01",
-                  "parentUUID": "665c8c60-6ff9-4800-a4b7-5f2fb5835081",
+                  "uuid": "5a8a2ce4-7845-498f-97a9-98d6624273f2",
+                  "parentUUID": "ee569a3a-ff6f-43a0-8deb-aac62bcf86b2",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "464a50d2-ad2f-44d9-b230-e8330ec9dcf9",
-                "1fa99585-a3b9-4c20-8749-9c8cdbf05d01"
+                "be46ece2-38ea-4d99-a3bc-c4a5a5e27ace",
+                "5a8a2ce4-7845-498f-97a9-98d6624273f2"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 26,
+              "duration": 25,
               "root": false,
               "rootEmpty": false,
               "_timeout": 10000
             },
             {
-              "uuid": "e49ae5b2-6e95-4b4a-8010-984732c6c5f2",
+              "uuid": "8ff63167-645b-4710-95d4-bbf6bcda9bb1",
               "title": "GET /users",
               "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/rest/external/userExternal.test.js",
               "file": "/test/rest/external/userExternal.test.js",
@@ -259,7 +259,7 @@
                   "title": "Quando solicito os dados de usuarios tenho sucesso com 200",
                   "fullTitle": "User external GET /users Quando solicito os dados de usuarios tenho sucesso com 200",
                   "timedOut": false,
-                  "duration": 3,
+                  "duration": 2,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -268,20 +268,20 @@
                   "context": null,
                   "code": "const resposta = await request(process.env.BASE_URL_REST)\n    .get('/users')\n    .send();\nexpect(resposta.status).to.equal(200);",
                   "err": {},
-                  "uuid": "e188a31e-f254-44c0-a8a6-ab797793c965",
-                  "parentUUID": "e49ae5b2-6e95-4b4a-8010-984732c6c5f2",
+                  "uuid": "52c0892a-e214-4b8d-93d0-a26277e8d594",
+                  "parentUUID": "8ff63167-645b-4710-95d4-bbf6bcda9bb1",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "e188a31e-f254-44c0-a8a6-ab797793c965"
+                "52c0892a-e214-4b8d-93d0-a26277e8d594"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 3,
+              "duration": 2,
               "root": false,
               "rootEmpty": false,
               "_timeout": 10000
