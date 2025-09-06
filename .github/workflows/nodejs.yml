@@ -38,8 +38,8 @@ jobs:
     
     - name: Criar .env
       run: |
-        echo "BASE_URL_REST={{ secrets.BASE_URL_REST }}" >> .env
-        echo "BASE_URL_GRAPHQL={{ secrets.BASE_URL_GRAPHQL }}" >> .env
+        echo "BASE_URL_REST= ${{ secrets.BASE_URL_REST }}" >> .env
+        echo "BASE_URL_GRAPHQL= ${{ secrets.BASE_URL_GRAPHQL }}" >> .env
 
     - name: Rodar os testes de API via HTTP
       run: npm run test-external
