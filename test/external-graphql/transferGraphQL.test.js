@@ -133,7 +133,7 @@ describe('GraphQL Transfer Mutations', () => {
       .send({
         query: `
           mutation {
-            createTransfer(from: "julio", to: "julcilea", value: 5000.01) {
+            createTransfer(from: "julio", to: "renata", value: 5000.01) {
               from
               to
               value

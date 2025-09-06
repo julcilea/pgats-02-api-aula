@@ -3,7 +3,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 
 // Testes
-describe('Transfer', () => {
+describe('Transfer external', () => {
     describe('POST /transfers', () => {
         beforeEach(async() => {
             // 1) Capturar o Token

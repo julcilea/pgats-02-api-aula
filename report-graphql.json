@@ -5,8 +5,8 @@
     "passes": 10,
     "pending": 0,
     "failures": 0,
-    "start": "2025-09-06T12:51:01.873Z",
-    "end": "2025-09-06T12:51:01.993Z",
+    "start": "2025-09-06T13:09:28.172Z",
+    "end": "2025-09-06T13:09:28.292Z",
     "duration": 120,
     "testsRegistered": 10,
     "passPercent": 100,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "bc70389c-25f4-45b1-b2de-885a168b4fee",
+      "uuid": "fb54357c-3f4b-40dc-ad53-6a900d5f9f07",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "562ee86e-4a82-45b0-b8e6-da5022b6a17a",
+          "uuid": "39ba908a-79a5-4155-a6b4-852077533dc2",
           "title": "GraphQL Transfer Mutations",
           "fullFile": "/home/julcilea/Documentos/PGATS/pgats-02-api-aula/test/external-graphql/transferGraphQL.test.js",
           "file": "/test/external-graphql/transferGraphQL.test.js",
@@ -45,8 +45,8 @@
               "context": null,
               "code": "const loginMutation = {\n  query: `\n    mutation LoginUser($username: String!, $password: String!) {\n      loginUser(username: $username, password: $password) {\n        token\n        user {\n          username\n        }\n      }\n    }\n  `,\n  variables: {\n    username: \"julio\",\n    password: \"123456\"\n  }\n};\nconst res = await request(app)\n  .post('/graphql')\n  .send(loginMutation);\n  if (res.body.errors) {\n      console.error('Erro ao fazer login:', res.body.errors);\n      throw new Error('Falha no login, verifique os dados de login ou o userService.js');\n  }\n  token = res.body.data.loginUser.token;",
               "err": {},
-              "uuid": "3c6d708d-314a-4d51-a86d-6dd94fac8d7a",
-              "parentUUID": "562ee86e-4a82-45b0-b8e6-da5022b6a17a",
+              "uuid": "99108407-b75c-4627-ae61-c7df1360ffd5",
+              "parentUUID": "39ba908a-79a5-4155-a6b4-852077533dc2",
               "isHook": true,
               "skipped": false
             }
@@ -66,8 +66,8 @@
               "context": null,
               "code": "const createTransferMutation = {\n  query: `\n    mutation {\n      createTransfer(from: \"julio\", to: \"isabelle\", value: 100) {\n        from\n        to\n        value\n      }\n    }\n  `\n};\nconst res = await request(app)\n  .post('/graphql')\n  .set('Authorization', `Bearer ${token}`)\n  .send(createTransferMutation);\nexpect(res.status).to.equal(200);\nexpect(res.body.errors[0].message).to.equal('Usuário remetente ou destinatário não encontrado');",
               "err": {},
-              "uuid": "330b1327-2b39-450f-b733-3a1e348f5109",
-              "parentUUID": "562ee86e-4a82-45b0-b8e6-da5022b6a17a",
+              "uuid": "15dd0943-336d-4fa6-bf77-b431f4062bc9",
+              "parentUUID": "39ba908a-79a5-4155-a6b4-852077533dc2",
               "isHook": false,
               "skipped": false
             },
@@ -84,8 +84,8 @@
               "context": null,
               "code": "const createTransferMutation = {\n  query: `\n    mutation {\n      createTransfer(from: \"julio\", to: \"priscila\", value: 100) {\n        from\n        to\n        value\n      }\n    }\n  `\n};\nconst res = await request(app)\n  .post('/graphql')\n  .set('Authorization', `Bearer ${token}`)\n  .send(createTransferMutation);\nexpect(res.status).to.equal(200);\nexpect(res.body.data.createTransfer).to.deep.equal({\n  from: 'julio',\n  to: 'priscila',\n  value: 100\n});",
               "err": {},
-              "uuid": "4d9a246c-5c41-47a8-9ff4-958b388bf715",
-              "parentUUID": "562ee86e-4a82-45b0-b8e6-da5022b6a17a",
+              "uuid": "40a66107-ec6a-4729-817c-bae1599f69c8",
+              "parentUUID": "39ba908a-79a5-4155-a6b4-852077533dc2",
               "isHook": false,
               "skipped": false
             },
@@ -102,8 +102,8 @@
               "context": null,
               "code": "const createTransferMutation = {\n  query: `\n    mutation {\n      createTransfer(from: \"julio\", to: \"priscila\", value: 50) {\n        from\n        to\n        value\n      }\n    }\n  `\n};\nconst res = await request(app)\n  .post('/graphql')\n  .send(createTransferMutation);\nexpect(res.status).to.equal(200);\nexpect(res.body.errors[0].message).to.equal('Autenticação obrigatória');",
               "err": {},
-              "uuid": "3ae41048-aec7-4b8c-b6a6-3ab24d534fb0",
-              "parentUUID": "562ee86e-4a82-45b0-b8e6-da5022b6a17a",
+              "uuid": "fe4be4e9-83aa-4fdc-808d-cbbbb5589728",
+              "parentUUID": "39ba908a-79a5-4155-a6b4-852077533dc2",
               "isHook": false,
               "skipped": false
             },
@@ -118,10 +118,10 @@
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "const response = await request(app)\n  .post('/graphql')\n  .set('Authorization', `Bearer ${token}`)\n  .send({\n    query: `\n      mutation {\n        createTransfer(from: \"julio\", to: \"priscila\", value: 10000.01) {\n          from\n          to\n          value\n        }\n      }\n    `\n  });\n\nexpect(response.status).to.equal(200); \nexpect(response.body.errors).to.be.an('array');\nexpect(response.body.errors[0].message).to.equal('Saldo insuficiente');",
+              "code": "const response = await request(app)\n  .post('/graphql')\n  .set('Authorization', `Bearer ${token}`)\n  .send({\n    query: `\n      mutation {\n        createTransfer(from: \"julio\", to: \"priscila\", value: 10000.01) {\n          from\n          to\n          value\n        }\n      }\n    `\n});\n\nexpect(response.status).to.equal(200); \nexpect(response.body.errors).to.be.an('array');\nexpect(response.body.errors[0].message).to.equal('Saldo insuficiente');",
               "err": {},
-              "uuid": "26a64a9b-6327-48b1-8e4f-836b00975cf0",
-              "parentUUID": "562ee86e-4a82-45b0-b8e6-da5022b6a17a",
+              "uuid": "30548a3f-fa72-44cf-a0fb-cb92b5f64892",
+              "parentUUID": "39ba908a-79a5-4155-a6b4-852077533dc2",
               "isHook": false,
               "skipped": false
             },
@@ -136,10 +136,10 @@
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "const response = await request(app)\n  .post('/graphql')\n  .set('Authorization', `Bearer ${token}`)\n  .send({\n    query: `\n      mutation {\n        createTransfer(from: \"julio\", to: \"julcilea\", value: 5000.01) {\n          from\n          to\n          value\n        }\n      }\n    `\n  });\n\nexpect(response.status).to.equal(200); \nexpect(response.body.errors).to.be.an('array');\nexpect(response.body.errors[0].message).to.equal(\n  'Transferência acima de R$ 5.000,00 só para favorecidos'\n);",
+              "code": "const response = await request(app)\n  .post('/graphql')\n  .set('Authorization', `Bearer ${token}`)\n  .send({\n    query: `\n      mutation {\n        createTransfer(from: \"julio\", to: \"julcilea\", value: 5000.01) {\n          from\n          to\n          value\n        }\n      }\n    `\n});\n\nexpect(response.status).to.equal(200); \nexpect(response.body.errors).to.be.an('array');\nexpect(response.body.errors[0].message).to.equal(\n  'Transferência acima de R$ 5.000,00 só para favorecidos'\n);",
               "err": {},
-              "uuid": "aa29e5a6-6f44-474a-8421-a11d7a02599e",
-              "parentUUID": "562ee86e-4a82-45b0-b8e6-da5022b6a17a",
+              "uuid": "6dc9e832-bc80-425c-aee2-6c4f3ea24871",
+              "parentUUID": "39ba908a-79a5-4155-a6b4-852077533dc2",
               "isHook": false,
               "skipped": false
             },
@@ -147,40 +147,40 @@
               "title": "Deve permitir transferência acima de R$ 5.000,00 para favorecidos",
               "fullTitle": "GraphQL Transfer Mutations Deve permitir transferência acima de R$ 5.000,00 para favorecidos",
               "timedOut": false,
-              "duration": 4,
+              "duration": 5,
               "state": "passed",
               "speed": "fast",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "const response = await request(app)\n  .post('/graphql')\n  .set('Authorization', `Bearer ${token}`)\n  .send({\n    query: `\n      mutation {\n        createTransfer(from: \"julio\", to: \"priscila\", value: 5000.01) {\n          from\n          to\n          value\n        }\n      }\n    `\n  });\nexpect(response.status).to.equal(200);\nexpect(response.body.data.createTransfer).to.have.property('from', 'julio');\nexpect(response.body.data.createTransfer).to.have.property('to', 'priscila');\nexpect(response.body.data.createTransfer).to.have.property('value', 5000.01);",
+              "code": "const response = await request(app)\n  .post('/graphql')\n  .set('Authorization', `Bearer ${token}`)\n  .send({\n    query: `\n      mutation {\n        createTransfer(from: \"julio\", to: \"priscila\", value: 5000.01) {\n          from\n          to\n          value\n        }\n      }\n    `\n});\nexpect(response.status).to.equal(200);\nexpect(response.body.data.createTransfer).to.have.property('from', 'julio');\nexpect(response.body.data.createTransfer).to.have.property('to', 'priscila');\nexpect(response.body.data.createTransfer).to.have.property('value', 5000.01);",
               "err": {},
-              "uuid": "32457295-a0ff-4fd7-b115-b8d705de9774",
-              "parentUUID": "562ee86e-4a82-45b0-b8e6-da5022b6a17a",
+              "uuid": "0dae239c-ed1d-48f8-80ac-cdedb9b708ad",
+              "parentUUID": "39ba908a-79a5-4155-a6b4-852077533dc2",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "330b1327-2b39-450f-b733-3a1e348f5109",
-            "4d9a246c-5c41-47a8-9ff4-958b388bf715",
-            "3ae41048-aec7-4b8c-b6a6-3ab24d534fb0",
-            "26a64a9b-6327-48b1-8e4f-836b00975cf0",
-            "aa29e5a6-6f44-474a-8421-a11d7a02599e",
-            "32457295-a0ff-4fd7-b115-b8d705de9774"
+            "15dd0943-336d-4fa6-bf77-b431f4062bc9",
+            "40a66107-ec6a-4729-817c-bae1599f69c8",
+            "fe4be4e9-83aa-4fdc-808d-cbbbb5589728",
+            "30548a3f-fa72-44cf-a0fb-cb92b5f64892",
+            "6dc9e832-bc80-425c-aee2-6c4f3ea24871",
+            "0dae239c-ed1d-48f8-80ac-cdedb9b708ad"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 32,
+          "duration": 33,
           "root": false,
           "rootEmpty": false,
           "_timeout": 10000
         },
         {
-          "uuid": "b3b2068a-b7e9-4202-825b-5e4ef0678093",
+          "uuid": "db0fe61a-fd02-4534-9fa3-f6547e81870e",
           "title": "GraphQL User Mutations & Queries",
           "fullFile": "/home/julcilea/Documentos/PGATS/pgats-02-api-aula/test/external-graphql/userGraphQL.test.js",
           "file": "/test/external-graphql/userGraphQL.test.js",
@@ -189,7 +189,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "12fcdfb9-192a-4187-aa39-429353ca2712",
+              "uuid": "cc23e944-6c81-4438-8284-25a994a40a55",
               "title": "registerUser",
               "fullFile": "/home/julcilea/Documentos/PGATS/pgats-02-api-aula/test/external-graphql/userGraphQL.test.js",
               "file": "/test/external-graphql/userGraphQL.test.js",
@@ -200,7 +200,7 @@
                   "title": "Quando informo usuario já existente recebo erro",
                   "fullTitle": "GraphQL User Mutations & Queries registerUser Quando informo usuario já existente recebo erro",
                   "timedOut": false,
-                  "duration": 3,
+                  "duration": 4,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -209,26 +209,26 @@
                   "context": null,
                   "code": "const mutation = {\n  query: `\n    mutation RegisterUser($username: String!, $password: String!, $favorecidos: [String!]) {\n      registerUser(username: $username, password: $password, favorecidos: $favorecidos) {\n        username\n      }\n    }\n  `,\n  variables: {\n    username: 'julio',\n    password: '123456',\n    favorecidos: ['camila']\n  }\n};\nconst res = await request(app)\n  .post('/graphql')\n  .send(mutation);\nexpect(res.body.errors[0].message).to.equal('Usuário já existe');",
                   "err": {},
-                  "uuid": "6e18c515-dba0-4f87-b5ca-7cc96031d3df",
-                  "parentUUID": "12fcdfb9-192a-4187-aa39-429353ca2712",
+                  "uuid": "33ab140e-319c-4afc-bc9b-42a961dfca6a",
+                  "parentUUID": "cc23e944-6c81-4438-8284-25a994a40a55",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "6e18c515-dba0-4f87-b5ca-7cc96031d3df"
+                "33ab140e-319c-4afc-bc9b-42a961dfca6a"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 3,
+              "duration": 4,
               "root": false,
               "rootEmpty": false,
               "_timeout": 10000
             },
             {
-              "uuid": "da954726-25f9-40b4-8aa1-65e1309ad5be",
+              "uuid": "d110f951-15e1-4db2-b6c0-1e7a19eb8555",
               "title": "loginUser",
               "fullFile": "/home/julcilea/Documentos/PGATS/pgats-02-api-aula/test/external-graphql/userGraphQL.test.js",
               "file": "/test/external-graphql/userGraphQL.test.js",
@@ -239,7 +239,7 @@
                   "title": "Quando informo login inexistente recebo erro",
                   "fullTitle": "GraphQL User Mutations & Queries loginUser Quando informo login inexistente recebo erro",
                   "timedOut": false,
-                  "duration": 6,
+                  "duration": 5,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -248,8 +248,8 @@
                   "context": null,
                   "code": "const mutation = {\n  query: `\n    mutation LoginUser($username: String!, $password: String!) {\n      loginUser(username: $username, password: $password) {\n        token\n      }\n    }\n  `,\n  variables: {\n    username: 'jansen',\n    password: '126'\n  }\n};\nconst res = await request(app)\n  .post('/graphql')\n  .send(mutation);\nexpect(res.body.errors[0].message).to.equal('Usuário não encontrado');",
                   "err": {},
-                  "uuid": "dc14151d-76a5-4155-9f44-6edd640a2c53",
-                  "parentUUID": "da954726-25f9-40b4-8aa1-65e1309ad5be",
+                  "uuid": "948afc95-eacd-478c-a98a-c77404cb128e",
+                  "parentUUID": "d110f951-15e1-4db2-b6c0-1e7a19eb8555",
                   "isHook": false,
                   "skipped": false
                 },
@@ -266,27 +266,27 @@
                   "context": null,
                   "code": "const mutation = {\n  query: `\n    mutation LoginUser($username: String!, $password: String!) {\n      loginUser(username: $username, password: $password) {\n        token\n        user {\n          username\n        }\n      }\n    }\n  `,\n  variables: {\n    username: 'julio',\n    password: '123456'\n  }\n};\nconst res = await request(app)\n  .post('/graphql')\n  .send(mutation);\nexpect(res.body.data.loginUser.token).to.exist;\ntoken = res.body.data.loginUser.token;",
                   "err": {},
-                  "uuid": "b0ea5d92-e2a2-4e02-a24d-3a28be242d7a",
-                  "parentUUID": "da954726-25f9-40b4-8aa1-65e1309ad5be",
+                  "uuid": "4aa49bfd-6eb9-43ca-88bd-c9aa0b01d855",
+                  "parentUUID": "d110f951-15e1-4db2-b6c0-1e7a19eb8555",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "dc14151d-76a5-4155-9f44-6edd640a2c53",
-                "b0ea5d92-e2a2-4e02-a24d-3a28be242d7a"
+                "948afc95-eacd-478c-a98a-c77404cb128e",
+                "4aa49bfd-6eb9-43ca-88bd-c9aa0b01d855"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 28,
+              "duration": 27,
               "root": false,
               "rootEmpty": false,
               "_timeout": 10000
             },
             {
-              "uuid": "cf764794-5222-4beb-9d4a-f6189ba0c8ac",
+              "uuid": "aaadc741-25ff-44d8-9a81-c63952b9e54a",
               "title": "users Query",
               "fullFile": "/home/julcilea/Documentos/PGATS/pgats-02-api-aula/test/external-graphql/userGraphQL.test.js",
               "file": "/test/external-graphql/userGraphQL.test.js",
@@ -297,7 +297,7 @@
                   "title": "Quando solicito os dados de usuarios recebo lista",
                   "fullTitle": "GraphQL User Mutations & Queries users Query Quando solicito os dados de usuarios recebo lista",
                   "timedOut": false,
-                  "duration": 4,
+                  "duration": 3,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
@@ -306,20 +306,20 @@
                   "context": null,
                   "code": "const query = {\n  query: `\n    query {\n      users {\n        username\n        saldo\n        favorecidos\n      }\n    }\n  `\n};\nconst res = await request(app)\n  .post('/graphql')\n  .set('Authorization', `Bearer ${token}`)\n  .send(query);\nexpect(res.body.data.users).to.be.an('array');\nexpect(res.body.data.users[0]).to.have.property('username');",
                   "err": {},
-                  "uuid": "b8c0885b-c4a0-440c-bc2e-8b5cef5bbfa7",
-                  "parentUUID": "cf764794-5222-4beb-9d4a-f6189ba0c8ac",
+                  "uuid": "86e81b11-3997-4072-a183-e277d07d26b6",
+                  "parentUUID": "aaadc741-25ff-44d8-9a81-c63952b9e54a",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "b8c0885b-c4a0-440c-bc2e-8b5cef5bbfa7"
+                "86e81b11-3997-4072-a183-e277d07d26b6"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 4,
+              "duration": 3,
               "root": false,
               "rootEmpty": false,
               "_timeout": 10000
