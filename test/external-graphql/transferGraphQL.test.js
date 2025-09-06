@@ -119,7 +119,7 @@ describe('GraphQL Transfer Mutations', () => {
             }
           }
         `
-      });
+    });
     
     expect(response.status).to.equal(200); 
     expect(response.body.errors).to.be.an('array');
@@ -140,7 +140,7 @@ describe('GraphQL Transfer Mutations', () => {
             }
           }
         `
-      });
+    });
     
     expect(response.status).to.equal(200); 
     expect(response.body.errors).to.be.an('array');
@@ -163,7 +163,7 @@ describe('GraphQL Transfer Mutations', () => {
             }
           }
         `
-      });
+    });
 
     expect(response.status).to.equal(200);
     expect(response.body.data.createTransfer).to.have.property('from', 'julio');
