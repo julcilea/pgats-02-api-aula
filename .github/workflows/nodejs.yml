@@ -49,7 +49,7 @@ jobs:
       run: npm run test-graphql  
         
     - name: Rodar os testes de API via HTTP
-      run: npm run est-graphql-external
+      run: npm run test-graphql-external
 
       # Publica o relatório no GitHub Pages
     - name: Deploy Mochawesome Reports para o GitHub Pages
