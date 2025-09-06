@@ -5,9 +5,9 @@
     "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2025-09-06T18:39:47.584Z",
-    "end": "2025-09-06T18:39:47.664Z",
-    "duration": 80,
+    "start": "2025-09-06T18:49:22.888Z",
+    "end": "2025-09-06T18:49:22.969Z",
+    "duration": 81,
     "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "32313c33-f8e2-45c9-b7be-f34a3941b4ba",
+      "uuid": "b128ebba-f700-42cf-82db-131192070089",
       "title": "",
       "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/graphql/external/transferGraphQLExternal.test.js",
       "file": "/test/graphql/external/transferGraphQLExternal.test.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "a8182a1a-e54c-45df-9a5d-eb66ca7c7830",
+          "uuid": "d3819487-6184-4fe8-9a7c-a525bfa6f2e9",
           "title": "GraphQL Transfer Mutations external",
           "fullFile": "/home/runner/work/pgats-02-api-aula/pgats-02-api-aula/test/graphql/external/transferGraphQLExternal.test.js",
           "file": "/test/graphql/external/transferGraphQLExternal.test.js",
@@ -45,8 +45,8 @@
               "context": null,
               "code": "const loginUser = require('../fixture/require/login/loginUser.json');\nconst resposta = await request('http://localhost:4000/graphql')\n  .post('')\n  .send(loginUser);\nif (resposta.body.errors) {\n  console.error('Erro ao fazer login:', resposta.body.errors);\n  throw new Error('Falha no login, verifique os dados de login ou o userService.js');\n}\ntoken = resposta.body.data.loginUser.token;",
               "err": {},
-              "uuid": "a4edbc15-076d-48f6-8797-9055bd66feb2",
-              "parentUUID": "a8182a1a-e54c-45df-9a5d-eb66ca7c7830",
+              "uuid": "d9539e0a-fdb4-4e47-b3ed-ab6d7e8a56a8",
+              "parentUUID": "d3819487-6184-4fe8-9a7c-a525bfa6f2e9",
               "isHook": true,
               "skipped": false
             },
@@ -63,8 +63,8 @@
               "context": null,
               "code": "createTransfer = require('../fixture/require/transfer/createTransfer.json');",
               "err": {},
-              "uuid": "288e90ec-d1df-41a3-9f9a-d0430c234abb",
-              "parentUUID": "a8182a1a-e54c-45df-9a5d-eb66ca7c7830",
+              "uuid": "b1199916-8339-4e96-acf0-e9e4b9d10470",
+              "parentUUID": "d3819487-6184-4fe8-9a7c-a525bfa6f2e9",
               "isHook": true,
               "skipped": false
             }
@@ -75,7 +75,7 @@
               "title": "Validar que transferencia entre dois usuarios com sucesso",
               "fullTitle": "GraphQL Transfer Mutations external Validar que transferencia entre dois usuarios com sucesso",
               "timedOut": false,
-              "duration": 9,
+              "duration": 8,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -84,8 +84,8 @@
               "context": null,
               "code": "const responsaEsperada = require('../fixture/response/transfer/ValidarQueTransferenciaEntreDoisUsuariosComSucesso.json');\nconst respostaTransferencia = await request('http://localhost:4000/graphql')\n  .post('')\n  .set('Authorization', `Bearer ${token}`)\n  .send(createTransfer);\nexpect(respostaTransferencia.status).to.equal(200);\nexpect(respostaTransferencia.body.data.createTransfer).excluding('date').to.deep.equal(responsaEsperada.data.createTransfer);",
               "err": {},
-              "uuid": "f8d0cc13-5894-49d5-bdd1-1bdc33bc7e4a",
-              "parentUUID": "a8182a1a-e54c-45df-9a5d-eb66ca7c7830",
+              "uuid": "5cbfaa3f-7036-4282-a803-fee961831736",
+              "parentUUID": "d3819487-6184-4fe8-9a7c-a525bfa6f2e9",
               "isHook": false,
               "skipped": false
             },
@@ -102,21 +102,21 @@
               "context": null,
               "code": "createTransfer.variables.value = 10000.01;\nconst responsaEsperada = require('../fixture/response/transfer/ValidarNaoEPossivelTransferirDeUmaContaSemSaldoSuficiente.json');\nconst respostaTransferencia = await request('http://localhost:4000/graphql')\n  .post('')\n  .set('Authorization', `Bearer ${token}`)\n  .send(createTransfer);\nexpect(respostaTransferencia.status).to.equal(200);\nexpect(respostaTransferencia.body.errors[0].message).to.deep.equal(responsaEsperada.errors[0].message);",
               "err": {},
-              "uuid": "e8b9cfbb-7b12-4cdb-b517-61c142a2e3e5",
-              "parentUUID": "a8182a1a-e54c-45df-9a5d-eb66ca7c7830",
+              "uuid": "fa5b08cd-2ab5-4bf3-9372-6ce93ea7d3e7",
+              "parentUUID": "d3819487-6184-4fe8-9a7c-a525bfa6f2e9",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "f8d0cc13-5894-49d5-bdd1-1bdc33bc7e4a",
-            "e8b9cfbb-7b12-4cdb-b517-61c142a2e3e5"
+            "5cbfaa3f-7036-4282-a803-fee961831736",
+            "fa5b08cd-2ab5-4bf3-9372-6ce93ea7d3e7"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 14,
+          "duration": 13,
           "root": false,
           "rootEmpty": false,
           "_timeout": 10000
