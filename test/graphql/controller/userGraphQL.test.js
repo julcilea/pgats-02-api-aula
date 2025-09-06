@@ -110,7 +110,6 @@ describe('GraphQL User Mutations & Queries', () => {
       expect(res.body.data.users).to.be.an('array');
       expect(res.body.data.users[0]).to.have.property('username');
     });
-
   });
 
 });

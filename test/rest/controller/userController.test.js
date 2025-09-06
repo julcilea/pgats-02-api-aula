@@ -4,11 +4,11 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 
 // Aplicação
-const app = require('../../app');
+const app = require('../../../app');
 
 // Mock
-const userService = require('../../service/userService');
-const userModel = require('../../model/userModel');
+const userService = require('../../../service/userService');
+const userModel = require('../../../model/userModel');
 const originalUsers = JSON.parse(JSON.stringify(userModel.users));
 
 // Testes
@@ -44,7 +44,7 @@ describe('User Controller', () => {
             });
             
             expect(resposta.status).to.equal(201);
-            const usuarioCriado = require('../fixture/respostas/quandoInformoValoresValidosUsuariosEuTenhoSucesso201Created.json');
+            const usuarioCriado = require('../../fixture/respostas/quandoInformoValoresValidosUsuariosEuTenhoSucesso201Created.json');
             expect(resposta.body).to.deep.equal(usuarioCriado);
 
         });
@@ -82,7 +82,7 @@ describe('User Controller', () => {
             });
 
             expect(resposta.status).to.equal(200);
-            const respostaLogin = require('../fixture/respostas/quandoInformoLoginValidoTenhoSucesso200.json');
+            const respostaLogin = require('../../fixture/respostas/quandoInformoLoginValidoTenhoSucesso200.json');
             delete resposta.body.token;
             delete respostaLogin.token;
             expect(resposta.body).to.deep.equal(respostaLogin);
@@ -107,7 +107,7 @@ describe('User Controller', () => {
                 .send();
 
             expect(resposta.status).to.equal(200);
-            const respostaCadastro = require('../fixture/respostas/quandoSolicitoDadosDosUsuariosEuTenhoSucesso200.json');
+            const respostaCadastro = require('../../fixture/respostas/quandoSolicitoDadosDosUsuariosEuTenhoSucesso200.json');
             expect(resposta.body).to.deep.equal(respostaCadastro);
 
         });

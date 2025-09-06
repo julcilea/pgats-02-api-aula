@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const app = require('../../graphql/app');
+const app = require('../../../graphql/app');
 
 describe('GraphQL Transfer Mutations', () => {
   let token = null;
